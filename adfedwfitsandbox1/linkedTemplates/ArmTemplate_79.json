@@ -1,0 +1,1071 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfedwfitsandbox1"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_SUBRO_CLAIMS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_CLAIMS\\PSA_SUBRO.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_CLAIMS\\SRC_GH_SUBRO.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-05T12:24:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_TIUDASH')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\ASBI\\SSIS\\DW_GW\\TIU_Dashboard.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\ASBI\\CONFIGURATION\\DW_GW\\TIU_DASHBOARD.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-22T11:21:26Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_APROVACAO_AUTOMATICA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_APROVACAO_AUTOMATICA.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:51:58Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_ASSISTENCIA_TECNICA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_ASSISTENCIA_TECNICA.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:46:58Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_ORDEM_PAGAMENTO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_ORDEM_PAGAMENTO.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:42:54Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_PECAS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_PECAS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:18:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_SINISTRO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_SINISTRO.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:38:27Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_SINISTRO_CLIENTE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_SINISTRO_CLIENTE.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:44:57Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_SINISTRO_COMENTARIO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_SINISTRO_COMENTARIO.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-26T06:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_SINISTRO_PECAS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_SINISTRO_PECAS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-26T06:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_SINISTRO_PRODUTO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_SINISTRO_PRODUTO.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:54:37Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WCA_SINISTRO_STATUS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_ELITA\\DW_WCA_SINISTRO_STATUS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_ELITA\\WCA.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-26T06:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WRK_APL_CORE_GBI_FILE_DATA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\WRK_APL_CORE_GBI_FILE_DATA_CUR.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\WRLS_VISION_FILE_LOAD_AM.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-12T06:26:37Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_WRLS_VISN_DATA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.WRLS.VISN_DATA.MAIN\\PSA_WIRELESS_VISION_FILE_LOAD.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.WRLS.VISN_DATA.MAIN\\WRLS_VISION_FILE_LOAD.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.WRLS.VISN_DATA.MAIN",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-31T10:40:55Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_D_XFINITY_MAIN')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_XFINITY",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.XFINITY.MAIN\\CLIENT_FACING_POWERBI.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.XFINITY.MAIN\\DW_XFINITY_LOGISTICSANALYSIS.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-25T07:13:43Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_EAST_TRADE_LINK_MAX_RECON')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PR_EAST_LINK_MAX_RECONCILIATION.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\EAST_TRADE_MAX_RECONCILIATION.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:42:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_EMPLOGIN')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "EPS_Login_History",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_EPS\\EPS_Login_History.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_EPS\\EPS_Compliance_Analysis.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-26T08:54:29Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_EMSCRM001')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PSA_EMS_CRM_INCIDENT.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\EMS_CRM.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T04:17:22Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_EMSCRM002')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PSA_EMS_CRM_PO_TICKETREASSIGNMENT.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedep\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\EMS_CRM.dtsConfigloymentssis\\ASBI\\CONFIGURATION\\COMMON\\LOGGING.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T04:22:50Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_EMSCRM003')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PSA_EMS_CRM_SLAKPIINSTANCEBASE.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedep\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\EMS_CRM.dtsConfigloymentssis\\ASBI\\CONFIGURATION\\COMMON\\LOGGING.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T04:24:59Z"
+			},
+			"dependsOn": []
+		}
+	]
+}

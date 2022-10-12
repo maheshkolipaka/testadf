@@ -1,0 +1,1161 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfedwfitsandbox1"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_H_VENTR_LOGS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_H_VENTR_LOGS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PSA_VENTURE_FILES_LOG_LOAD.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\PSA_VENTURE_FILES_LOG_LOAD.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\e938d059a28c4cb190017cdb99a63a35",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-16T12:54:10Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_IDODETMT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_IDODETMT",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PSA_IDOLOGY_DETAIL_MASTER.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\PSA_IDOLOGY_DETAIL_MASTER.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-04T11:39:18Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_IDODETMT_')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PSA_IDOLOGY_DETAIL_MASTER.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\PSA_IDOLOGY_DETAIL_MASTER.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-13T12:10:55Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_INMNT_MFH_ONBRD')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\ASBI\\SSIS\\DW_OUTGOING\\PSA_ASSRNT_INMOMENT_GENERIC.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\ASBI\\CONFIGURATION\\DW_OUTGOING\\inmoment.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-12T10:51:43Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_ITEMMST')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\PSA_REPORTSDB_ITEMMASTER.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "https://sadwfitpoc1.file.core.windows.net/packagedeploymentssis/sqlserver/ssis/development/BI/Configuration/DW_GW/PSA_REPORTDB.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T09:47:09Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_ANAEVENTS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_ANAEVENTS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_ANALYTICS_EVENTS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T10:07:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_APPBRAND')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\POCKET_GEEK_MOBILE_APP_BRANDINGS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T12:22:01Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_APPBRANDFEATURE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_APPBRANDFEATURE",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_APP_BRANDING_FEATURES.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T10:09:53Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_CONDVCS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\POCKET_GEEK_MOBILE_CONSUMER_DEVICES.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T12:32:47Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_FEAEVENTS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_FEAEVENTS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_FEATURE_EVENTS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T09:52:59Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_FEASETCHG')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\POCKET_GEEK_MOBILE_FEATURE_SET_CHANGES.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T12:47:09Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_FEASETS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\POCKET_GEEK_MOBILE_FUTURE_SETS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T12:54:17Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_GBLENRSUM')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_GBLENRSUM",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_GLOBAL_ENROLLMENT_SUMMARY.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-04T12:11:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_INAPP_NPSSVYS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_INAPP_NPSSVYS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_IN_APP_NPS_SURVEYS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T10:11:59Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_LEGDVCS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\POCKET_GEEK_MOBILE_LEGACY_DEVICES.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T13:26:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_LGCYINAPP_NPSSVYS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_LGCYINAPP_NPSSVYS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_LEGACY_IN_APP_NPS_SURVEYS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T12:08:38Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_NPSSVYS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_NPSSVYS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_IN_APP_NPS_SURVEYS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T10:05:18Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_PSTCLM_NPSSVYS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_PSTCLM_NPSSVYS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_POST_CLAIM_NPS_SURVEYS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T12:11:01Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_SOCCODES')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\POCKET_GEEK_MOBILE_SOC_CODES.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {},
+							"logLocation": {
+								"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									}
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T13:31:00Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_LMOBDEF_USERS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "P5BI_LMOBDEF_USERS",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\POCKET_GEEK_MOBILE_USERS.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\BI_GWS_DOM\\DW_MOBILEDEFENSE.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T12:13:02Z"
+			},
+			"dependsOn": []
+		}
+	]
+}

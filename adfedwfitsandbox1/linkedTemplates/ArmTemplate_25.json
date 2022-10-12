@@ -1,0 +1,1056 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfedwfitsandbox1"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDD018')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\DW_AR_DD_P2_REJECTION_REASON.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_AR_DEVICE_DISPOSITION_PH2.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T07:08:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDD019')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\DW_AR_DD_P2_PRICING.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_AR_DEVICE_DISPOSITION_PH2.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T07:08:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDD020')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\DW_AR_DD_AR_DEVICE_HISTORY.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\DW_GW\\DW_AR_DEVICE_DISPOSITION_PH2.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T08:54:20Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDD021')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\DW_AR_DD_AR_MAPPING.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_AR_DEVICE_DISPOSITION_PH2.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:53:32Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDD022')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\DW_AR_DD_AR_QUESTION.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_AR_DEVICE_DISPOSITION_PH2.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T07:01:57Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDD023')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_GW\\DW_AR_DD_AR_EQUIPMENT_QUESTION.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GW\\DW_AR_DEVICE_DISPOSITION_PH2.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:05:20Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDCL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Close_ETL_RUN_ID.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:52:22Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDELCL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Close_ETL_RUN_ID.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_EQUIP_LIST_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDELPS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_SQL_Server_System.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_EQUIP_LIST_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDELRE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Reconcile.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_EQUIP_LIST_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDELSRC')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Direct_Source_Table_Count.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_EQUIP_LIST_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDELST')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Open_ETL_RUN_ID.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_EQUIP_LIST_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:49:39Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDELSTG')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_SQL_Server_System.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_EQUIP_LIST_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDPH2CL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Close_ETL_RUN_ID.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_PH2_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDPH2PS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_SQL_Server_System.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_PH2_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDPH2REC')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Reconcile.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_PH2_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T09:16:03Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDPH2SRC')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_SQL_Server_System.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_PH2_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:52:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDPH2ST')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Open_ETL_RUN_ID.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_PH2_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:50:59Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDPS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_SQL_Server_System.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": " \\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T06:02:38Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P5BI_DARDDREC')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\COMMON\\DATA_AUDIT\\PR_Data_Audit_Reconcile.dtsx",
+								"type": "File",
+								"typeProperties": {
+									"accessCredential": {
+										"domain": "Azure",
+										"userName": "sadwfitpoc1",
+										"password": {
+											"type": "SecureString",
+											"value": "**********"
+										}
+									},
+									"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\COMMON\\DATA_AUDIT\\AR_DEVICE_DISPOSITION_Daily_Audit.dtsConfig"
+								}
+							},
+							"connectVia": {
+								"referenceName": "SSISIR-customtest",
+								"type": "IntegrationRuntimeReference"
+							},
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-25T05:34:26Z"
+			},
+			"dependsOn": []
+		}
+	]
+}

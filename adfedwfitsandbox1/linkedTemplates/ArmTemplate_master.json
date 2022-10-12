@@ -1,0 +1,2705 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfedwfitsandbox1"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"Databricks_Xml_Read_Implement_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_Xml_Read_Implement'"
+		},
+		"FileServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FileServer1'"
+		},
+		"Genericsp_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Genericsp'"
+		},
+		"LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLSG2_saedwfitsndboxpoc1_Strgkey'"
+		},
+		"LS_ADLS_sadwfitpoc1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_sadwfitpoc1'"
+		},
+		"LS_AIZ0VSQLP100001_Server_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AIZ0VSQLP100001_Server'"
+		},
+		"LS_Azure_VM_Onpremise_SQL_Server_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_Azure_VM_Onpremise_SQL_Server'"
+		},
+		"LS_CONFIG_MetadataDetails_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_CONFIG_MetadataDetails'"
+		},
+		"LS_DBXDELTA_adb_4774423564615502_2_patusedinkeyvlt_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'LS_DBXDELTA_adb_4774423564615502_2_patusedinkeyvlt'"
+		},
+		"LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt'"
+		},
+		"LS_DW_POC_MetadataDetails_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_DW_POC_MetadataDetails'"
+		},
+		"LS_ONPREM_DW_CX_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ONPREM_DW_CX'"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_AppAcc_DWH_biuserprd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQLDB_AIZ0VSQLP100001_AppAcc_DWH_biuserprd'"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd'"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd'"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd'"
+		},
+		"LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd'"
+		},
+		"LS_SYN_Azure_VM_Target_DedPool_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SYN_Azure_VM_Target_DedPool'"
+		},
+		"LS_SYN_MI_synedwfitsandbox1dedpool_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SYN_MI_synedwfitsandbox1dedpool'"
+		},
+		"SSISIR_pkg_testing_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SSISIR_pkg_testing'"
+		},
+		"SSIS_IR_RK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SSIS_IR_RK'"
+		},
+		"SSISlinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SSISlinkedService'"
+		},
+		"Source_check_ajay_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Source_check_ajay'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"SqltoConfig_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqltoConfig'"
+		},
+		"SqltoConfigDB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqltoConfigDB'"
+		},
+		"ajay_check_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ajay_check'"
+		},
+		"genericADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'genericADLS'"
+		},
+		"generic_testing_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'generic_testing'"
+		},
+		"genericsource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'genericsource'"
+		},
+		"linkpksgstredwfitsandbox1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkpksgstredwfitsandbox1'"
+		},
+		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "dbsrv-pwd-vdbpSMART-AppAcc-DWH-biuserprd"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"Databricks_Xml_Read_Implement_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1228-150922-u59a7679"
+		},
+		"FileServer1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\atl0appstore1.cead.prd\\ASBI_PROD\\staging\\"
+		},
+		"FileServer1_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "gz5477"
+		},
+		"LSAccessSrcService_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://saedwfitsndboxpoc1.dfs.core.windows.net"
+		},
+		"LSAccessSrcService_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "331d1275-437c-4934-8eae-f5c7a0170487"
+		},
+		"LSAccessSrcService_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "016fb9eb-47e8-496f-b590-c0a65310c92f"
+		},
+		"LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://saedwfitsndboxpoc1.dfs.core.windows.net"
+		},
+		"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://saedwfitsndboxpoc1.dfs.core.windows.net"
+		},
+		"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "331d1275-437c-4934-8eae-f5c7a0170487"
+		},
+		"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "016fb9eb-47e8-496f-b590-c0a65310c92f"
+		},
+		"LS_ADLS_Staging_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sadwfitpoc1.dfs.core.windows.net"
+		},
+		"LS_ADLS_Staging_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "331d1275-437c-4934-8eae-f5c7a0170487"
+		},
+		"LS_ADLS_Staging_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "016fb9eb-47e8-496f-b590-c0a65310c92f"
+		},
+		"LS_ADLS_sadwfitpoc1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"LS_AIZ0VSQLP100001_Server_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "prodcead\\biuserdev"
+		},
+		"LS_Azure_VM_Onpremise_SQL_Server_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "prodcead\\biuserdev"
+		},
+		"LS_Azure_VM_to_ADLS_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\vm-dw-sandbox\\SHIR\\"
+		},
+		"LS_Azure_VM_to_ADLS_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "prodcead\\biuserdev"
+		},
+		"LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1228-150922-u59a7679"
+		},
+		"LS_FILE_atl0appstore1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\atl0appstore1.cead.prd\\ASBI_DEV"
+		},
+		"LS_FILE_atl0appstore1_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\atl0appstore1.cead.prd\\ASBI_PROD\\staging\\eps\\paymenttech\\biztalkoutbound"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\atl0appstore1.cead.prd\\ASBI_DEV\\staging\\eps\\paymenttech\\biztalkoutbound"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_KV_GDA_DEV_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-aiz-gda-dev3.vault.azure.net/"
+		},
+		"LS_Keyvlt_kyvltedwsndbxfit_MI_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kyvltedwsndbxfit.vault.azure.net/"
+		},
+		"LS_OnPremToADLS_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\atl0appstore1.cead.prd\\ASBI_DEV\\"
+		},
+		"LS_OnPremToADLS_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "al2890"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "prodcead\\biuserdev"
+		},
+		"LS_saedwfitbxstorepoc_ADF_Azure_IR_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://saedwfitdbxstorepoc.dfs.core.windows.net"
+		},
+		"LS_saedwfitdbxstorepoc_ADF_MI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://saedwfitdbxstorepoc.dfs.core.windows.net"
+		},
+		"Source_check_ajay_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "prodcead\\biuserdev"
+		},
+		"ajay_check_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://saedwfitsndboxpoc1.dfs.core.windows.net/"
+		},
+		"genericADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"POCSSISIRSDLL_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"type": "secureString"
+		},
+		"SSISIR-customtest_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"type": "secureString"
+		},
+		"AzureDataLakeStorage246_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/40fb0dac-7090-48ba-8b98-b1298e2106d8/resourceGroups/RGDW-FIT-POC/providers/Microsoft.Storage/storageAccounts/saedwfitdbxstorepoc"
+		},
+		"AzureDataLakeStorage246_properties_groupId": {
+			"type": "string",
+			"defaultValue": "dfs"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage2_connectionString": {
+						"value": "[parameters('AzureBlobStorage2_connectionString')]"
+					},
+					"FileServer1_password": {
+						"value": "[parameters('FileServer1_password')]"
+					},
+					"Genericsp_connectionString": {
+						"value": "[parameters('Genericsp_connectionString')]"
+					},
+					"LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_accountKey": {
+						"value": "[parameters('LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_accountKey')]"
+					},
+					"LS_AIZ0VSQLP100001_Server_connectionString": {
+						"value": "[parameters('LS_AIZ0VSQLP100001_Server_connectionString')]"
+					},
+					"LS_Azure_VM_Onpremise_SQL_Server_connectionString": {
+						"value": "[parameters('LS_Azure_VM_Onpremise_SQL_Server_connectionString')]"
+					},
+					"LS_CONFIG_MetadataDetails_connectionString": {
+						"value": "[parameters('LS_CONFIG_MetadataDetails_connectionString')]"
+					},
+					"LS_KV_GDA_DEV_properties_typeProperties_baseUrl": {
+						"value": "[parameters('LS_KV_GDA_DEV_properties_typeProperties_baseUrl')]"
+					},
+					"LS_Keyvlt_kyvltedwsndbxfit_MI_properties_typeProperties_baseUrl": {
+						"value": "[parameters('LS_Keyvlt_kyvltedwsndbxfit_MI_properties_typeProperties_baseUrl')]"
+					},
+					"FileServer1_properties_typeProperties_host": {
+						"value": "[parameters('FileServer1_properties_typeProperties_host')]"
+					},
+					"FileServer1_properties_typeProperties_userId": {
+						"value": "[parameters('FileServer1_properties_typeProperties_userId')]"
+					},
+					"LSAccessSrcService_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('LSAccessSrcService_properties_typeProperties_serviceEndpoint')]"
+					},
+					"LSAccessSrcService_properties_typeProperties_tenant": {
+						"value": "[parameters('LSAccessSrcService_properties_typeProperties_tenant')]"
+					},
+					"LSAccessSrcService_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('LSAccessSrcService_properties_typeProperties_servicePrincipalId')]"
+					},
+					"LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_properties_typeProperties_url')]"
+					},
+					"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_url')]"
+					},
+					"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_tenant": {
+						"value": "[parameters('LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_tenant')]"
+					},
+					"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_servicePrincipalId')]"
+					},
+					"LS_ADLS_Staging_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLS_Staging_properties_typeProperties_url')]"
+					},
+					"LS_ADLS_Staging_properties_typeProperties_tenant": {
+						"value": "[parameters('LS_ADLS_Staging_properties_typeProperties_tenant')]"
+					},
+					"LS_ADLS_Staging_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('LS_ADLS_Staging_properties_typeProperties_servicePrincipalId')]"
+					},
+					"LS_AIZ0VSQLP100001_Server_properties_typeProperties_userName": {
+						"value": "[parameters('LS_AIZ0VSQLP100001_Server_properties_typeProperties_userName')]"
+					},
+					"LS_Azure_VM_Onpremise_SQL_Server_properties_typeProperties_userName": {
+						"value": "[parameters('LS_Azure_VM_Onpremise_SQL_Server_properties_typeProperties_userName')]"
+					},
+					"LS_Azure_VM_to_ADLS_properties_typeProperties_host": {
+						"value": "[parameters('LS_Azure_VM_to_ADLS_properties_typeProperties_host')]"
+					},
+					"LS_Azure_VM_to_ADLS_properties_typeProperties_userId": {
+						"value": "[parameters('LS_Azure_VM_to_ADLS_properties_typeProperties_userId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_DBXDELTA_adb_4774423564615502_2_patusedinkeyvlt_accessToken": {
+						"value": "[parameters('LS_DBXDELTA_adb_4774423564615502_2_patusedinkeyvlt_accessToken')]"
+					},
+					"LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_accessToken": {
+						"value": "[parameters('LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_accessToken')]"
+					},
+					"LS_DW_POC_MetadataDetails_connectionString": {
+						"value": "[parameters('LS_DW_POC_MetadataDetails_connectionString')]"
+					},
+					"LS_ONPREM_DW_CX_connectionString": {
+						"value": "[parameters('LS_ONPREM_DW_CX_connectionString')]"
+					},
+					"LS_SQLDB_AIZ0VSQLP100001_AppAcc_DWH_biuserprd_connectionString": {
+						"value": "[parameters('LS_SQLDB_AIZ0VSQLP100001_AppAcc_DWH_biuserprd_connectionString')]"
+					},
+					"LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_connectionString": {
+						"value": "[parameters('LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_connectionString')]"
+					},
+					"LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd_connectionString": {
+						"value": "[parameters('LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd_connectionString')]"
+					},
+					"LS_SYN_Azure_VM_Target_DedPool_connectionString": {
+						"value": "[parameters('LS_SYN_Azure_VM_Target_DedPool_connectionString')]"
+					},
+					"LS_SYN_MI_synedwfitsandbox1dedpool_connectionString": {
+						"value": "[parameters('LS_SYN_MI_synedwfitsandbox1dedpool_connectionString')]"
+					},
+					"Source_check_ajay_connectionString": {
+						"value": "[parameters('Source_check_ajay_connectionString')]"
+					},
+					"SqlServer1_connectionString": {
+						"value": "[parameters('SqlServer1_connectionString')]"
+					},
+					"SqltoConfig_connectionString": {
+						"value": "[parameters('SqltoConfig_connectionString')]"
+					},
+					"SqltoConfigDB_connectionString": {
+						"value": "[parameters('SqltoConfigDB_connectionString')]"
+					},
+					"ajay_check_accountKey": {
+						"value": "[parameters('ajay_check_accountKey')]"
+					},
+					"LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_properties_typeProperties_existingClusterId')]"
+					},
+					"LS_FILE_atl0appstore1_properties_typeProperties_host": {
+						"value": "[parameters('LS_FILE_atl0appstore1_properties_typeProperties_host')]"
+					},
+					"LS_FILE_atl0appstore1_properties_typeProperties_userId": {
+						"value": "[parameters('LS_FILE_atl0appstore1_properties_typeProperties_userId')]"
+					},
+					"LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_host": {
+						"value": "[parameters('LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_host')]"
+					},
+					"LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_userId": {
+						"value": "[parameters('LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_userId')]"
+					},
+					"LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_host": {
+						"value": "[parameters('LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_host')]"
+					},
+					"LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_userId": {
+						"value": "[parameters('LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_userId')]"
+					},
+					"LS_OnPremToADLS_properties_typeProperties_host": {
+						"value": "[parameters('LS_OnPremToADLS_properties_typeProperties_host')]"
+					},
+					"LS_OnPremToADLS_properties_typeProperties_userId": {
+						"value": "[parameters('LS_OnPremToADLS_properties_typeProperties_userId')]"
+					},
+					"LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_properties_typeProperties_userName')]"
+					},
+					"LS_saedwfitbxstorepoc_ADF_Azure_IR_properties_typeProperties_url": {
+						"value": "[parameters('LS_saedwfitbxstorepoc_ADF_Azure_IR_properties_typeProperties_url')]"
+					},
+					"LS_saedwfitdbxstorepoc_ADF_MI_properties_typeProperties_url": {
+						"value": "[parameters('LS_saedwfitdbxstorepoc_ADF_MI_properties_typeProperties_url')]"
+					},
+					"Source_check_ajay_properties_typeProperties_userName": {
+						"value": "[parameters('Source_check_ajay_properties_typeProperties_userName')]"
+					},
+					"ajay_check_properties_typeProperties_url": {
+						"value": "[parameters('ajay_check_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"generic_testing_connectionString": {
+						"value": "[parameters('generic_testing_connectionString')]"
+					},
+					"genericsource_connectionString": {
+						"value": "[parameters('genericsource_connectionString')]"
+					},
+					"linkpksgstredwfitsandbox1_connectionString": {
+						"value": "[parameters('linkpksgstredwfitsandbox1_connectionString')]"
+					},
+					"AzureDataLakeStorage246_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureDataLakeStorage246_properties_privateLinkResourceId')]"
+					},
+					"AzureDataLakeStorage246_properties_groupId": {
+						"value": "[parameters('AzureDataLakeStorage246_properties_groupId')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_4')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_6",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_6.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"Databricks_Xml_Read_Implement_accessToken": {
+						"value": "[parameters('Databricks_Xml_Read_Implement_accessToken')]"
+					},
+					"LS_ADLS_sadwfitpoc1_accountKey": {
+						"value": "[parameters('LS_ADLS_sadwfitpoc1_accountKey')]"
+					},
+					"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_connectionString": {
+						"value": "[parameters('LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_connectionString')]"
+					},
+					"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_password": {
+						"value": "[parameters('LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_password')]"
+					},
+					"SSISIR_pkg_testing_connectionString": {
+						"value": "[parameters('SSISIR_pkg_testing_connectionString')]"
+					},
+					"SSIS_IR_RK_connectionString": {
+						"value": "[parameters('SSIS_IR_RK_connectionString')]"
+					},
+					"SSISlinkedService_connectionString": {
+						"value": "[parameters('SSISlinkedService_connectionString')]"
+					},
+					"genericADLS_accountKey": {
+						"value": "[parameters('genericADLS_accountKey')]"
+					},
+					"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"Databricks_Xml_Read_Implement_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('Databricks_Xml_Read_Implement_properties_typeProperties_existingClusterId')]"
+					},
+					"LS_ADLS_sadwfitpoc1_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLS_sadwfitpoc1_properties_typeProperties_url')]"
+					},
+					"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_properties_typeProperties_userName')]"
+					},
+					"genericADLS_properties_typeProperties_url": {
+						"value": "[parameters('genericADLS_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_6')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_8",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_8.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_7')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_9",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_9.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"POCSSISIRSDLL_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+						"value": "[parameters('POCSSISIRSDLL_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
+					},
+					"SSISIR-customtest_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+						"value": "[parameters('SSISIR-customtest_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_8')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_10",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_10.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_9')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_11",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_11.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_10')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_12",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_12.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_11')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_13",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_13.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_12')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_14",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_14.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_13')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_15",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_15.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_14')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_16",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_16.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_15')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_17",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_17.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_16')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_18",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_18.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_17')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_19",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_19.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_18')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_20",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_20.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_19')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_21",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_21.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_20')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_22",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_22.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_21')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_23",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_23.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_22')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_24",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_24.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_23')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_25",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_25.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_24')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_26",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_26.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_25')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_27",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_27.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_26')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_28",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_28.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_27')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_29",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_29.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_28')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_30",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_30.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_29')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_31",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_31.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_30')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_32",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_32.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_31')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_33",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_33.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_32')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_34",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_34.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_33')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_35",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_35.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_34')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_36",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_36.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_35')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_37",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_37.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_36')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_38",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_38.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_37')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_39",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_39.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_38')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_40",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_40.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_39')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_41",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_41.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_40')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_42",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_42.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_41')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_43",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_43.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_42')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_44",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_44.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_43')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_45",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_45.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_44')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_46",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_46.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_45')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_47",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_47.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_46')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_48",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_48.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_47')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_49",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_49.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_48')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_50",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_50.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_49')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_51",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_51.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_50')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_52",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_52.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_51')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_53",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_53.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_52')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_54",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_54.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_53')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_55",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_55.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_54')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_56",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_56.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_55')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_57",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_57.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_56')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_58",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_58.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_57')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_59",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_59.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_58')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_60",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_60.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_59')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_61",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_61.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_60')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_62",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_62.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_61')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_63",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_63.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_62')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_64",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_64.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_63')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_65",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_65.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_64')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_66",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_66.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_65')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_67",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_67.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_66')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_68",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_68.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_67')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_69",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_69.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_68')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_70",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_70.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_69')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_71",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_71.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_70')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_72",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_72.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_71')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_73",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_73.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_72')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_74",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_74.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_73')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_75",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_75.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_74')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_76",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_76.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_75')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_77",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_77.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_76')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_78",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_78.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_77')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_79",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_79.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_78')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_80",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_80.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_79')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_81",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_81.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_80')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_82",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_82.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_81')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_83",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_83.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_82')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_84",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_84.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_83')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_85",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_85.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_84')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_86",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_86.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_85')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_87",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_87.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_86')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_88",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_88.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_87')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_89",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_89.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_88')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_90",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_90.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_89')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_91",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_91.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_90')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_92",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_92.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_91')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_93",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_93.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_92')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_94",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_94.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_93')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_95",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_95.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_94')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_96",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_96.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_95')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_97",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_97.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_96')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_98",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_98.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_97')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_99",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_99.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_98')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_100",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_100.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_99')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_101",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_101.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_100')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_102",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_102.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_101')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_103",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_103.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_102')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_104",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_104.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_103')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_105",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_105.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_104')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_106",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_106.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_105')]"
+			]
+		},
+		{
+			"name": "adfedwfitsandbox1_ArmTemplate_107",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_107.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfedwfitsandbox1_ArmTemplate_106')]"
+			]
+		}
+	]
+}

@@ -1,0 +1,4213 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfedwfitsandbox1"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"Databricks_Xml_Read_Implement_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_Xml_Read_Implement'"
+		},
+		"LS_ADLS_sadwfitpoc1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_sadwfitpoc1'"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd'"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd'"
+		},
+		"SSISIR_pkg_testing_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SSISIR_pkg_testing'"
+		},
+		"SSIS_IR_RK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SSIS_IR_RK'"
+		},
+		"SSISlinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SSISlinkedService'"
+		},
+		"genericADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'genericADLS'"
+		},
+		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "dbsrv-pwd-vdbpSMART-AppAcc-DWH-biuserprd"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"Databricks_Xml_Read_Implement_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1228-150922-u59a7679"
+		},
+		"LS_ADLS_sadwfitpoc1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "al2890"
+		},
+		"genericADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sadwfitpoc1.dfs.core.windows.net/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "LS_Keyvlt_kyvltedwsndbxfit_MI",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('AzureBlobStorage1_properties_typeProperties_connectionString_secretName')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Databricks_Xml_Read_Implement')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked service to connect to Databricks ",
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-4774423564615502.2.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('Databricks_Xml_Read_Implement_accessToken')]"
+					},
+					"existingClusterId": "[parameters('Databricks_Xml_Read_Implement_properties_typeProperties_existingClusterId')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ADLS_sadwfitpoc1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_ADLS_sadwfitpoc1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_ADLS_sadwfitpoc1_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_connectionString')]",
+					"userName": "[parameters('LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SSISIR_pkg_testing')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "By ajay",
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('SSISIR_pkg_testing_connectionString')]",
+					"fileShare": "packagedeploymentssis"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SSIS_IR_RK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('SSIS_IR_RK_connectionString')]",
+					"fileShare": "packagedeploymentssis"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SSISlinkedService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('SSISlinkedService_connectionString')]",
+					"fileShare": "ssispackagestore"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/genericADLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('genericADLS_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('genericADLS_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AS_DM_File_Transfer_From_Onpremsis')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data from shared file to azure",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"parallelCopies": 32,
+							"dataIntegrationUnits": 32
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_AzureVMToADLS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Azure_taget_File_location",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T20:36:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AS_DataMigration_Extract_CopyComand_Azure_VM_v1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select * from [ADF_CONFIG].[DM_MetadataDetails] where  Comments  = 'Test1'\n",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_Config_Metadata_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,'1')",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "DS_Azure_VM_SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_synapse_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": "@item().TargetSchema",
+															"ObjectName": "@item().ObjectName"
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '',\n '',\n '',\n '',\n '',\n '',\n '')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "DS_Azure_VM_SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_synapse_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": "@item().TargetSchema",
+															"ObjectName": "@item().ObjectName"
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n'',\n'',\n'',\n'',\n'',\n'',\n'')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ADF_DataMigration"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T01:31:50Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AS_DataMigration_Extract_CopyComand_Azure_VM_v1_File')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "\nselect TOP 1 * from ADF_CONFIG.DM_MetadataDetails where TargetSchema like '%Test1%'",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_Config_Metadata_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,'1')",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "ParquetSink",
+														"storeSettings": {
+															"type": "FileServerWriteSettings"
+														},
+														"formatSettings": {
+															"type": "ParquetWriteSettings"
+														}
+													},
+													"enableStaging": false,
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "DS_Azure_VM_SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "Parquet2",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '',\n '',\n '',\n '',\n '',\n '',\n '')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "DS_Azure_VM_SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_synapse_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": "@item().TargetSchema",
+															"ObjectName": "@item().ObjectName"
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n'',\n'',\n'',\n'',\n'',\n'',\n'')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ADF_DataMigration"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-03T01:31:50Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AS_DataMigration_Extract_CopyComand_v1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select * from  [ADF_CONFIG].[DM_MetadataDetails] where objectName = 'FACT_PREMIUM' and  targetSchema = 'DW_DFS_DFSDM_Test1' \nand isDataMigrated = 0 and comments not in ('Test1')",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_Config_Metadata_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,'1')",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "DynamicRange",
+														"partitionSettings": {
+															"partitionColumnName": "PREMIUM_ID",
+															"partitionUpperBound": "",
+															"partitionLowerBound": ""
+														}
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"parallelCopies": 16,
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													},
+													"dataIntegrationUnits": 16
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": "@item().TargetSchema",
+															"ObjectName": "@item().ObjectName"
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '',\n '',\n '',\n '',\n '',\n '',\n '')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": "@item().TargetSchema",
+															"ObjectName": "@item().ObjectName"
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n'',\n'',\n'',\n'',\n'',\n'',\n'')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ADF_DataMigration"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-23T19:12:34Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AS_DataMigration_Extract_CopyComand_v1_copy1_Sankar')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT Top 2 * FROM [ADF_CONFIG].[DM_MetadataDetails] WHERE TargetSchema like '%Test1%'",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_Config_Metadata_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,'1')",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "AzureSqlSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"writeBehavior": "insert",
+														"sqlWriterUseTableLock": true,
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load_config",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '',\n '',\n '',\n '',\n '',\n '',\n '')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": "@item().TargetSchema",
+															"ObjectName": "@item().ObjectName"
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n'',\n'',\n'',\n'',\n'',\n'',\n'')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ADF_DataMigration"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-05T07:41:26Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AS_DataMigration_Extract_Polybase_Azure_VM_v1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "\nselect * from ADF_CONFIG.DM_MetadataDetails where TargetSchema like '%Test1%'",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_Config_Metadata_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,'1')",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowPolyBase": true,
+														"polyBaseSettings": {
+															"rejectValue": 0,
+															"rejectType": "value",
+															"useTypeDefault": true
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"parallelCopies": 24,
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Polybase' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Polybase' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '',\n '',\n '',\n '',\n '',\n '',\n '')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowPolyBase": true,
+														"polyBaseSettings": {
+															"rejectValue": 0,
+															"rejectType": "value",
+															"useTypeDefault": true
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "DS_Azure_VM_SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": "@item().SchemaName",
+															"ObjectName": "@item().ObjectName",
+															"DataBaseName": "@item().DataBaseName"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_synapse_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": "@item().TargetSchema",
+															"ObjectName": "@item().ObjectName"
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Polybase',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Polybase',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n'',\n'',\n'',\n'',\n'',\n'',\n'')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ADF_DataMigration"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T05:57:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AS_DataMigration_Extract_Polybase_v1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "\t  select * \n  FROM [DW_POC].[PEOPLETECH].[DM_MetadataDetails] where objectname = 'BWPHIST'",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_POC_READ_METADATATABLE",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,'1')",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowPolyBase": true,
+														"polyBaseSettings": {
+															"rejectValue": 0,
+															"rejectType": "value",
+															"useTypeDefault": true
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"parallelCopies": 24,
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Polybase' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Polybase' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '',\n '',\n '',\n '',\n '',\n '',\n '')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_pass",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_CONFIG_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Polybase',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_identity_audit_info_synapse_fail",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [ADF_CONFIG].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Polybase',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n'',\n'',\n'',\n'',\n'',\n'',\n'')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ADF_DataMigration"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-29T05:57:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyOnpremToADLS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get Metadata1",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "OnPremCsvSourceFiles",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "FileServerReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings",
+								"skipLineCount": 0
+							}
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata1').output.childItems",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Get Metadata2",
+									"type": "GetMetadata",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "DS_OnpremToADLSFiles",
+											"type": "DatasetReference",
+											"parameters": {
+												"FileName": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
+										},
+										"fieldList": [
+											"itemName",
+											"lastModified"
+										],
+										"storeSettings": {
+											"type": "FileServerReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false
+										},
+										"formatSettings": {
+											"type": "DelimitedTextReadSettings"
+										}
+									}
+								},
+								{
+									"name": "If Condition1",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Get Metadata2",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@greater(formatDateTime(activity('Get Metadata2').output.lastModified,'yyyyMMddHHmmss'),formatDateTime(variables('PREMODIFYDATE'),'yyyyMMddHHmmss'))",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "Set variable1",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "LATESTFILENAME",
+													"value": {
+														"value": "@activity('Get Metadata2').output.itemName",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								},
+								{
+									"name": "LastModified",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "If Condition1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "PREMODIFYDATE",
+										"value": {
+											"value": "@activity('Get Metadata2').output.lastModified",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ForEach1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_OnpremToADLSFiles",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileName": {
+										"value": "@variables('LATESTFILENAME')",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AdlsCsvfilesFolder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"LATESTFILENAME": {
+						"type": "String"
+					},
+					"PREMODIFYDATE": {
+						"type": "String",
+						"defaultValue": "1990-01-01T05:12:22Z"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-12T12:36:44Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataMigration_Extract_CopyComand_v1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select * from DW_POC.PEOPLETECH.DM_MetadataDetails where ObjectName in ('DIM_REASON_CODE','DIM_ACTION_CODE','DATE_DIM')\nand objecttype = 'Table'",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_POC_Access",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,1)",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_src_database",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_DW_POC_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC].[PEOPLETECH].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Comand' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC_Audit].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Copy Command' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_onprem_db_1",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_DW_POC_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC].[PEOPLETECH].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Comand',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_1",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC_Audit].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'Copy Command',\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-23T07:15:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataMigration_Extract_Manju_Inprogress_copyComand')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select * from DW_POC.PEOPLETECH.DM_MetadataDetails where ObjectName in ('DIM_REASON_CODE','DIM_ACTION_CODE','DATE_DIM')\nand objecttype = 'Table'",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_POC_Access",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,1)",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_src_database",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_DW_POC_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC].[PEOPLETECH].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'@{activity('Ingest into Synapse').ActivityType}' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{activity('Ingest into Synapse').Error}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC_Audit].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'@{activity('Ingest into Synapse').ActivityType}' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{activity('Ingest into Synapse').Error}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_src_database_copy1",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_DW_POC_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC].[PEOPLETECH].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'@{activity('Ingest into Synapse_identity').ActivityType}' ,\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{activity('Ingest into Synapse_identity').Error}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_copy1",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC_Audit].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'@{activity('Ingest into Synapse_identity').ActivityType}' ,\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{activity('Ingest into Synapse_identity').Error}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-21T05:49:59Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataMigration_Extract_Manju_Inprogress_polybase')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Extract List Tables",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select * from DW_POC.PEOPLETECH.DM_MetadataDetails where ObjectName in ('DIM_REASON_CODE','DIM_ACTION_CODE','DATE_DIM')\nand objecttype = 'Table'",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_POC_Access",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Data Extract List Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Data Extract List Tables').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Identity_Flag",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().is_identity,1)",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Ingest into Synapse",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowPolyBase": true,
+														"polyBaseSettings": {
+															"rejectValue": 0,
+															"rejectType": "value",
+															"useTypeDefault": true
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_onprem_db",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_DW_POC_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC].[PEOPLETECH].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Poly Base' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_Pass_audit_info_synapse",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC_Audit].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse').PipelineRunId}',\n  '@{activity('Ingest into Synapse').ActivityRunId}', \n'Poly Base' ,\n'@{activity('Ingest into Synapse').StatusCode}', \n'@{activity('Ingest into Synapse').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse').Error),'''','')}', \n'@{activity('Ingest into Synapse').ExecutionStartTime}', \n'@{activity('Ingest into Synapse').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse').output.dataRead}',\n'@{activity('Ingest into Synapse').output.dataWritten}',\n'@{activity('Ingest into Synapse').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse').output.rowsRead}',\n'@{activity('Ingest into Synapse').output.rowsCopied}',\n'@{activity('Ingest into Synapse').output.copyDuration}',\n'@{activity('Ingest into Synapse').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Ingest into Synapse_identity",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@item().SourceQuery",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlDWSink",
+														"preCopyScript": {
+															"value": "TRUNCATE TABLE @{item().TargetSchema}.@{item().ObjectName}",
+															"type": "Expression"
+														},
+														"allowCopyCommand": true,
+														"copyCommandSettings": {
+															"additionalOptions": {
+																"IDENTITY_INSERT": "'ON'"
+															}
+														},
+														"tableOption": "autoCreate",
+														"disableMetricsCollection": false
+													},
+													"enableStaging": true,
+													"stagingSettings": {
+														"linkedServiceName": {
+															"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+															"type": "LinkedServiceReference"
+														},
+														"path": "adfstrg",
+														"enableCompression": true
+													},
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Info",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+																"type": "LinkedServiceReference"
+															},
+															"path": "adfdatamigrationlogs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SourceSQLConnection",
+														"type": "DatasetReference",
+														"parameters": {
+															"SchemaName": {
+																"value": "@item().SchemaName",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															},
+															"DataBaseName": {
+																"value": "@item().DatabaseName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "DS_target_load",
+														"type": "DatasetReference",
+														"parameters": {
+															"TargetSchema": {
+																"value": "@item().TargetSchema",
+																"type": "Expression"
+															},
+															"ObjectName": {
+																"value": "@item().ObjectName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Add_audit_info_src_database_copy1",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_DW_POC_MetadataDetails",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC].[PEOPLETECH].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'@{activity('Ingest into Synapse_identity').ActivityType}' ,\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											},
+											{
+												"name": "Add_audit_info_synapse_copy1",
+												"type": "Script",
+												"dependsOn": [
+													{
+														"activity": "Ingest into Synapse_identity",
+														"dependencyConditions": [
+															"Succeeded",
+															"Failed"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"linkedServiceName": {
+													"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+													"type": "LinkedServiceReference"
+												},
+												"typeProperties": {
+													"scripts": [
+														{
+															"type": "Query",
+															"text": {
+																"value": "Insert into [DW_POC_Audit].[Audit_Data_Migration_Run_Stats] \n(PipelineName, PipelineRunId, ActivityRunId, ActivityType, StatusCode, ExecutionStatus,\n error, ExecutionStartTime, ExecutionEndTime,\nDataBaseName, SchemaName, ObjectName, SourceQuery, TargetSchema, dataRead_bytes, dataWritten_bytes, \nsourcePeakConnections, rowsRead, rowsCopied, copyDuration_sec, throughput_kbps)\n( Select '@{pipeline().Pipeline}',\n'@{activity('Ingest into Synapse_identity').PipelineRunId}',\n  '@{activity('Ingest into Synapse_identity').ActivityRunId}', \n'@{activity('Ingest into Synapse_identity').ActivityType}' ,\n'@{activity('Ingest into Synapse_identity').StatusCode}', \n'@{activity('Ingest into Synapse_identity').ExecutionStatus}', \n'@{replace(string(activity('Ingest into Synapse_identity').Error),'''','')}', \n'@{activity('Ingest into Synapse_identity').ExecutionStartTime}', \n'@{activity('Ingest into Synapse_identity').ExecutionEndTime}',\n'@{item().DataBaseName}', '@{item().SchemaName}', '@{item().ObjectName}',\n'@{item().SourceQuery}',  '@{item().TargetSchema}',\n '@{activity('Ingest into Synapse_identity').output.dataRead}',\n'@{activity('Ingest into Synapse_identity').output.dataWritten}',\n'@{activity('Ingest into Synapse_identity').output.sourcePeakConnections}',\n'@{activity('Ingest into Synapse_identity').output.rowsRead}',\n'@{activity('Ingest into Synapse_identity').output.rowsCopied}',\n'@{activity('Ingest into Synapse_identity').output.copyDuration}',\n'@{activity('Ingest into Synapse_identity').output.throughput}')",
+																"type": "Expression"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"TargetLocation": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-23T06:28:55Z"
+			},
+			"dependsOn": []
+		}
+	]
+}

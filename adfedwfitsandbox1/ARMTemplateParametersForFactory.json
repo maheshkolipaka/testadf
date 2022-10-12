@@ -1,0 +1,234 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfedwfitsandbox1"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"Databricks_Xml_Read_Implement_accessToken": {
+			"value": ""
+		},
+		"FileServer1_password": {
+			"value": ""
+		},
+		"Genericsp_connectionString": {
+			"value": ""
+		},
+		"LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_accountKey": {
+			"value": ""
+		},
+		"LS_ADLS_sadwfitpoc1_accountKey": {
+			"value": ""
+		},
+		"LS_AIZ0VSQLP100001_Server_connectionString": {
+			"value": ""
+		},
+		"LS_Azure_VM_Onpremise_SQL_Server_connectionString": {
+			"value": ""
+		},
+		"LS_CONFIG_MetadataDetails_connectionString": {
+			"value": ""
+		},
+		"LS_DBXDELTA_adb_4774423564615502_2_patusedinkeyvlt_accessToken": {
+			"value": ""
+		},
+		"LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_accessToken": {
+			"value": ""
+		},
+		"LS_DW_POC_MetadataDetails_connectionString": {
+			"value": ""
+		},
+		"LS_ONPREM_DW_CX_connectionString": {
+			"value": ""
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_AppAcc_DWH_biuserprd_connectionString": {
+			"value": ""
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_connectionString": {
+			"value": ""
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_password": {
+			"value": ""
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_connectionString": {
+			"value": ""
+		},
+		"LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd_connectionString": {
+			"value": ""
+		},
+		"LS_SYN_Azure_VM_Target_DedPool_connectionString": {
+			"value": ""
+		},
+		"LS_SYN_MI_synedwfitsandbox1dedpool_connectionString": {
+			"value": ""
+		},
+		"SSISIR_pkg_testing_connectionString": {
+			"value": ""
+		},
+		"SSIS_IR_RK_connectionString": {
+			"value": ""
+		},
+		"SSISlinkedService_connectionString": {
+			"value": ""
+		},
+		"Source_check_ajay_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"SqltoConfig_connectionString": {
+			"value": ""
+		},
+		"SqltoConfigDB_connectionString": {
+			"value": ""
+		},
+		"ajay_check_accountKey": {
+			"value": ""
+		},
+		"genericADLS_accountKey": {
+			"value": ""
+		},
+		"generic_testing_connectionString": {
+			"value": ""
+		},
+		"genericsource_connectionString": {
+			"value": ""
+		},
+		"linkpksgstredwfitsandbox1_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage1_properties_typeProperties_connectionString_secretName": {
+			"value": "dbsrv-pwd-vdbpSMART-AppAcc-DWH-biuserprd"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"Databricks_Xml_Read_Implement_properties_typeProperties_existingClusterId": {
+			"value": "1228-150922-u59a7679"
+		},
+		"FileServer1_properties_typeProperties_host": {
+			"value": "\\\\atl0appstore1.cead.prd\\ASBI_PROD\\staging\\"
+		},
+		"FileServer1_properties_typeProperties_userId": {
+			"value": "gz5477"
+		},
+		"LSAccessSrcService_properties_typeProperties_serviceEndpoint": {
+			"value": "https://saedwfitsndboxpoc1.dfs.core.windows.net"
+		},
+		"LSAccessSrcService_properties_typeProperties_tenant": {
+			"value": "331d1275-437c-4934-8eae-f5c7a0170487"
+		},
+		"LSAccessSrcService_properties_typeProperties_servicePrincipalId": {
+			"value": "016fb9eb-47e8-496f-b590-c0a65310c92f"
+		},
+		"LS_ADLSG2_saedwfitsndboxpoc1_Strgkey_properties_typeProperties_url": {
+			"value": "https://saedwfitsndboxpoc1.dfs.core.windows.net"
+		},
+		"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_url": {
+			"value": "https://saedwfitsndboxpoc1.dfs.core.windows.net"
+		},
+		"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_tenant": {
+			"value": "331d1275-437c-4934-8eae-f5c7a0170487"
+		},
+		"LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1_properties_typeProperties_servicePrincipalId": {
+			"value": "016fb9eb-47e8-496f-b590-c0a65310c92f"
+		},
+		"LS_ADLS_Staging_properties_typeProperties_url": {
+			"value": "https://sadwfitpoc1.dfs.core.windows.net"
+		},
+		"LS_ADLS_Staging_properties_typeProperties_tenant": {
+			"value": "331d1275-437c-4934-8eae-f5c7a0170487"
+		},
+		"LS_ADLS_Staging_properties_typeProperties_servicePrincipalId": {
+			"value": "016fb9eb-47e8-496f-b590-c0a65310c92f"
+		},
+		"LS_ADLS_sadwfitpoc1_properties_typeProperties_url": {
+			"value": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"LS_AIZ0VSQLP100001_Server_properties_typeProperties_userName": {
+			"value": "prodcead\\biuserdev"
+		},
+		"LS_Azure_VM_Onpremise_SQL_Server_properties_typeProperties_userName": {
+			"value": "prodcead\\biuserdev"
+		},
+		"LS_Azure_VM_to_ADLS_properties_typeProperties_host": {
+			"value": "\\\\vm-dw-sandbox\\SHIR\\"
+		},
+		"LS_Azure_VM_to_ADLS_properties_typeProperties_userId": {
+			"value": "prodcead\\biuserdev"
+		},
+		"LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt_properties_typeProperties_existingClusterId": {
+			"value": "1228-150922-u59a7679"
+		},
+		"LS_FILE_atl0appstore1_properties_typeProperties_host": {
+			"value": "\\\\atl0appstore1.cead.prd\\ASBI_DEV"
+		},
+		"LS_FILE_atl0appstore1_properties_typeProperties_userId": {
+			"value": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_host": {
+			"value": "\\\\atl0appstore1.cead.prd\\ASBI_PROD\\staging\\eps\\paymenttech\\biztalkoutbound"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod_properties_typeProperties_userId": {
+			"value": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_host": {
+			"value": "\\\\atl0appstore1.cead.prd\\ASBI_DEV\\staging\\eps\\paymenttech\\biztalkoutbound"
+		},
+		"LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd_properties_typeProperties_userId": {
+			"value": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_KV_GDA_DEV_properties_typeProperties_baseUrl": {
+			"value": "https://kv-aiz-gda-dev3.vault.azure.net/"
+		},
+		"LS_Keyvlt_kyvltedwsndbxfit_MI_properties_typeProperties_baseUrl": {
+			"value": "https://kyvltedwsndbxfit.vault.azure.net/"
+		},
+		"LS_OnPremToADLS_properties_typeProperties_host": {
+			"value": "\\\\atl0appstore1.cead.prd\\ASBI_DEV\\"
+		},
+		"LS_OnPremToADLS_properties_typeProperties_userId": {
+			"value": "PRODCEAD\\Appacc_DWH_biuserprd"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_Appacc_DWH_Biusrprd_properties_typeProperties_userName": {
+			"value": "al2890"
+		},
+		"LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd_properties_typeProperties_userName": {
+			"value": "prodcead\\biuserdev"
+		},
+		"LS_saedwfitbxstorepoc_ADF_Azure_IR_properties_typeProperties_url": {
+			"value": "https://saedwfitdbxstorepoc.dfs.core.windows.net"
+		},
+		"LS_saedwfitdbxstorepoc_ADF_MI_properties_typeProperties_url": {
+			"value": "https://saedwfitdbxstorepoc.dfs.core.windows.net"
+		},
+		"Source_check_ajay_properties_typeProperties_userName": {
+			"value": "prodcead\\biuserdev"
+		},
+		"ajay_check_properties_typeProperties_url": {
+			"value": "https://saedwfitsndboxpoc1.dfs.core.windows.net/"
+		},
+		"genericADLS_properties_typeProperties_url": {
+			"value": "https://sadwfitpoc1.dfs.core.windows.net/"
+		},
+		"POCSSISIRSDLL_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"value": ""
+		},
+		"SSISIR-customtest_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"value": ""
+		},
+		"AzureDataLakeStorage246_properties_privateLinkResourceId": {
+			"value": "/subscriptions/40fb0dac-7090-48ba-8b98-b1298e2106d8/resourceGroups/RGDW-FIT-POC/providers/Microsoft.Storage/storageAccounts/saedwfitdbxstorepoc"
+		},
+		"AzureDataLakeStorage246_properties_groupId": {
+			"value": "dfs"
+		}
+	}
+}

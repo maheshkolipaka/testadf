@@ -1,0 +1,1194 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfedwfitsandbox1"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SQL_Generic_Query1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Generic dataset to connect to data warehouse database",
+				"linkedServiceName": {
+					"referenceName": "genericsource",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"SQLServerInstance": {
+						"type": "string"
+					},
+					"DatabaseName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "DEPRECATED-DoNotDeleteOrUse"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Src_details')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "MetaData Tables_test_3.csv",
+						"folderPath": "data_migration_src",
+						"fileSystem": "test"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "DataBaseName",
+						"type": "String"
+					},
+					{
+						"name": "SchemaName",
+						"type": "String"
+					},
+					{
+						"name": "ObjectName",
+						"type": "String"
+					},
+					{
+						"name": "TargetSchema",
+						"type": "String"
+					},
+					{
+						"name": "LastGeneratedTime",
+						"type": "String"
+					},
+					{
+						"name": "Object Type",
+						"type": "String"
+					},
+					{
+						"name": "Is Structure Migrated",
+						"type": "String"
+					},
+					{
+						"name": "Environment",
+						"type": "String"
+					},
+					{
+						"name": "Is Data Migrated",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Src_details_poly_test')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "MetaData Tables_test_1.csv",
+						"folderPath": "data_migration_src",
+						"fileSystem": "test"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "DataBaseName",
+						"type": "String"
+					},
+					{
+						"name": "SchemaName",
+						"type": "String"
+					},
+					{
+						"name": "ObjectName",
+						"type": "String"
+					},
+					{
+						"name": "TargetSchema",
+						"type": "String"
+					},
+					{
+						"name": "LastGeneratedTime",
+						"type": "String"
+					},
+					{
+						"name": "Object Type",
+						"type": "String"
+					},
+					{
+						"name": "Is Structure Migrated",
+						"type": "String"
+					},
+					{
+						"name": "Environment",
+						"type": "String"
+					},
+					{
+						"name": "Is Data Migrated",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_onpremsql1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQLDB_AIZ0VSQLP100001_AppAcc_DWH_biuserprd",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "DMK_EXCEPTION_RULE_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RuleName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProgramId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ActionID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DMK_CREATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DMK_CREATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "DMK_UPDATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DMK_UPDATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_SOURCEFILE_NO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OBI_LOAD_SEQ",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OBI_CREATED_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_MOD_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_MOD_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_REC_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DWPSA",
+					"table": "DMK_BILL_DEALER_CUR"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_src_server_list')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "AIZ0VSQLP100001_Server_Data_Load.csv",
+						"folderPath": "data_migration_src",
+						"fileSystem": "test"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ServerName",
+						"type": "String"
+					},
+					{
+						"name": "Database",
+						"type": "String"
+					},
+					{
+						"name": "Schema",
+						"type": "String"
+					},
+					{
+						"name": "TableName",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_synapse_DW_EPS_DWPSA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DEALERCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ISACTIVE",
+						"type": "bit"
+					},
+					{
+						"name": "BILLINGPROGRAMCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "REFERENCENUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPDATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UPDATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_MOD_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_MOD_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_REC_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DW_EPS_DWPSA",
+					"table": "DMK_BILL_DEALER_CUR"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_synapse_DW_EPS_DWPSA_copy1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DEALERCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ISACTIVE",
+						"type": "bit"
+					},
+					{
+						"name": "BILLINGPROGRAMCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "REFERENCENUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPDATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UPDATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_MOD_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_MOD_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_REC_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DW_EPS_DWPSA",
+					"table": "DMK_BILL_DEALER_CUR"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_synapse_HRO_Claims')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "HRO",
+					"table": "HRO_CLAIMS_CSV"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_synapse_HRO_Policy')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "HRO",
+					"table": "HRO_POLICY_CSV"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_synapse_Test_DATE_DIM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DEALERCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ISACTIVE",
+						"type": "bit"
+					},
+					{
+						"name": "BILLINGPROGRAMCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "REFERENCENUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPDATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UPDATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_MOD_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_MOD_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_REC_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "Test",
+					"table": "DATE_DIM"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_target_load')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TargetSchema": {
+						"type": "string",
+						"defaultValue": "@dataset().TargetSchema"
+					},
+					"ObjectName": {
+						"type": "string",
+						"defaultValue": "@dataset().ObjectName"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TargetSchema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().ObjectName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_target_load_config')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqltoConfigDB",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TargetSchema": {
+						"type": "string",
+						"defaultValue": "@dataset().TargetSchema"
+					},
+					"ObjectName": {
+						"type": "string",
+						"defaultValue": "@dataset().ObjectName"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TargetSchema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().ObjectName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_target_synapse_load')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_Azure_VM_Target_DedPool",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TargetSchema": {
+						"type": "string",
+						"defaultValue": "@dataset().TargetSchema"
+					},
+					"ObjectName": {
+						"type": "string",
+						"defaultValue": "@dataset().ObjectName"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TargetSchema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().ObjectName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_test_csv_hro_claim_src')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "HRO_CLAIMS.csv",
+						"folderPath": "hro_data",
+						"fileSystem": "test"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_test_csv_hro_policy_src')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "HRO_POLICY.csv",
+						"folderPath": "hro_data",
+						"fileSystem": "test"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_test_excel')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Book1.xlsx",
+						"fileSystem": "test"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "JobPlanname",
+						"type": "String"
+					},
+					{
+						"name": "JobType",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "bcp/DW_EPS",
+						"fileSystem": "dbmigration"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedTextdt1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "bcp/DW_EPS/DWPSA",
+						"fileSystem": "dbmigration"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ManjuOnpremiseSQLPOCTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_DW_POC_MetadataDetails",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Manju_SynapseSQLConnection')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "DATE_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CALENDAR_YEAR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CALENDAR_QUARTER",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CALENDAR_MONTH",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CALENDAR_MONTH_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "CALENDAR_DAY",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CALENDAR_WEEK",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DAY_OF_WEEK",
+						"type": "varchar"
+					},
+					{
+						"name": "HOLIDAY_INDICATOR",
+						"type": "varchar"
+					},
+					{
+						"name": "FULL_DATE",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "COSTCO_FISCAL_YEAR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "COSTCO_FISCAL_MONTH",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DFSDM",
+					"table": "DATE_DIM"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

@@ -1,0 +1,768 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfedwfitsandbox1"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/OnPremCsvSourceFiles')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_OnPremToADLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"folderPath": "PeopleTech_CopyOnpremToADLS/mobile"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PSA_billing_main_dealer')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DealerCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Description",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IsActive",
+						"type": "bit"
+					},
+					{
+						"name": "BillingProgramCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ReferenceNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UpdatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UpdatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Dealer"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PSa_billing_main_dealer_raw')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Folder": {
+						"type": "string"
+					},
+					"Filename": {
+						"type": "string"
+					},
+					"Subfolder1": {
+						"type": "string"
+					},
+					"Subfolder2": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().Filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat(dataset().Folder, '/', dataset().Subfolder1, '/', dataset().Subfolder2)",
+							"type": "Expression"
+						},
+						"fileSystem": "raw"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "paytech",
+						"fileSystem": "test"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_Azure_VM_to_ADLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation"
+					},
+					"compressionCodec": "gzip"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Paytech_Main_Source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Paytechmain_destination')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@pipeline().parameters.FolderName",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@pipeline().parameters.ContainerName",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Paytechv1tgt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "paytech/raw",
+						"fileSystem": "test"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pyatechv1src')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "065213.closed_batch_190626.csv_resp"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/REPORT_AB_HEADER_RECORDS_CUR_dt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "bcp/DW_POST_STAGING/PAYTECH",
+						"fileSystem": "dbmigration"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/REPORT_AB_HEADER_RECORDS_HIS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "bcp/DW_POST_STAGING/PAYTECH",
+						"fileSystem": "dbmigration"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceSQLConnection')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AIZ0VSQLP100001_Server",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"DataBaseName": {
+							"value": "@dataset().DataBaseName",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"SchemaName": {
+						"type": "string",
+						"defaultValue": "@dataset().SchemaName"
+					},
+					"ObjectName": {
+						"type": "string",
+						"defaultValue": "@dataset().ObjectName"
+					},
+					"DataBaseName": {
+						"type": "string",
+						"defaultValue": "@dataset().DataBaseName"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().SchemaName",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().ObjectName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DealerCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Description",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IsActive",
+						"type": "bit"
+					},
+					{
+						"name": "BillingProgramCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ReferenceNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UpdatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UpdatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Dealer"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DEALERCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ISACTIVE",
+						"type": "bit"
+					},
+					{
+						"name": "BILLINGPROGRAMCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "REFERENCENUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPDATEDBY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UPDATEDON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_MOD_DT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "OBI_MOD_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_REC_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DWPSA",
+					"table": "DMK_BILL_DEALER_CUR"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "FILE_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "RECORD_TYPE",
+						"type": "varchar"
+					},
+					{
+						"name": "COMPANY_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "REPORT_DATE_FROM",
+						"type": "date"
+					},
+					{
+						"name": "REPORT_DATE_TO",
+						"type": "date"
+					},
+					{
+						"name": "REPORT_GENERATION_DATE",
+						"type": "date"
+					},
+					{
+						"name": "REPORT_GENERATION_TIME",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "OBI_CREATED_DT",
+						"type": "datetime2",
+						"scale": 2
+					},
+					{
+						"name": "OBI_CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_MOD_DT",
+						"type": "datetime2",
+						"scale": 2
+					},
+					{
+						"name": "OBI_MOD_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "INBOUND_FILENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "RECEIVED_DATE",
+						"type": "datetime2",
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "PAYTECH",
+					"table": "REPORT_AB_HEADER_RECORDS_CUR"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "FILE_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "RECORD_TYPE",
+						"type": "varchar"
+					},
+					{
+						"name": "COMPANY_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "REPORT_DATE_FROM",
+						"type": "date"
+					},
+					{
+						"name": "REPORT_DATE_TO",
+						"type": "date"
+					},
+					{
+						"name": "REPORT_GENERATION_DATE",
+						"type": "date"
+					},
+					{
+						"name": "REPORT_GENERATION_TIME",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "OBI_CREATED_DT",
+						"type": "datetime2",
+						"scale": 2
+					},
+					{
+						"name": "OBI_CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBI_MOD_DT",
+						"type": "datetime2",
+						"scale": 2
+					},
+					{
+						"name": "OBI_MOD_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "INBOUND_FILENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "RECEIVED_DATE",
+						"type": "datetime2",
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "PAYTECH",
+					"table": "REPORT_AB_HEADER_RECORDS_HIS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTableDT2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DWPSA",
+					"table": "DMK_BILL_DEALER_HIS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_src_server')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AIZ0VSQLP100001_Server",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/paytech_dest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "paytech",
+						"fileSystem": "test"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/paytech_src')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "065213.closed_batch_190626.csv_resp"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		}
+	]
+}
