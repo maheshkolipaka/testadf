@@ -1,0 +1,40 @@
+{
+	"name": "DS_File_ADLS_Rawzone_Binary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Container": {
+				"type": "string"
+			},
+			"Directory": {
+				"type": "string"
+			},
+			"Filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@if(equals(dataset().Filename,' ') ,'',dataset().Filename)",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().Directory",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().Container",
+					"type": "Expression"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

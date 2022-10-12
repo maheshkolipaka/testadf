@@ -1,0 +1,16 @@
+{
+	"name": "DS_ASQL_CONFIGURATION_Query1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Genericsp",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DEPRECATED-DoNotDeleteOrUse"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

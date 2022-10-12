@@ -1,0 +1,92 @@
+{
+	"name": "DS_onpremsql1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQLDB_AIZ0VSQLP100001_AppAcc_DWH_biuserprd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "DMK_EXCEPTION_RULE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RuleName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ProgramId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ActionID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DMK_CREATEDBY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DMK_CREATEDON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "DMK_UPDATEDBY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DMK_UPDATEDON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_SOURCEFILE_NO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OBI_LOAD_SEQ",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OBI_CREATED_DT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_CREATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBI_MOD_DT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_MOD_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBI_REC_ID",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "DWPSA",
+			"table": "DMK_BILL_DEALER_CUR"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

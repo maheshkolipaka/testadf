@@ -1,0 +1,22 @@
+{
+	"name": "OnPremCsvSourceFiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_OnPremToADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"folderPath": "PeopleTech_CopyOnpremToADLS/mobile"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

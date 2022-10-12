@@ -1,0 +1,24 @@
+{
+	"name": "LS_SQLDB_vdbpSMART_Appacc_DWH_Biusrprd",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "vdbpSMART.database.cead.prd ",
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=vdbpSMART.database.cead.prd;Initial Catalog=EPS_PORTAL;User ID=AppAcc_DWH_biuserprd",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_Keyvlt_kyvltedwsndbxfit_MI",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "dbsrv-pwd-vdbpSMART-AppAcc-DWH-biuserprd"
+			}
+		},
+		"connectVia": {
+			"referenceName": "shiredwfitsandbox1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

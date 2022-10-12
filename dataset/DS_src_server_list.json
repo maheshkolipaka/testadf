@@ -1,0 +1,42 @@
+{
+	"name": "DS_src_server_list",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "AIZ0VSQLP100001_Server_Data_Load.csv",
+				"folderPath": "data_migration_src",
+				"fileSystem": "test"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ServerName",
+				"type": "String"
+			},
+			{
+				"name": "Database",
+				"type": "String"
+			},
+			{
+				"name": "Schema",
+				"type": "String"
+			},
+			{
+				"name": "TableName",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

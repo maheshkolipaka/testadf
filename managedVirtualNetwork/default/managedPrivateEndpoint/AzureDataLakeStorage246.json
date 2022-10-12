@@ -1,0 +1,7 @@
+{
+	"name": "AzureDataLakeStorage246",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/40fb0dac-7090-48ba-8b98-b1298e2106d8/resourceGroups/RGDW-FIT-POC/providers/Microsoft.Storage/storageAccounts/saedwfitdbxstorepoc",
+		"groupId": "dfs"
+	}
+}

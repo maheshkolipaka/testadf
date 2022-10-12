@@ -1,0 +1,6 @@
+{
+	"name": "AzureVMIR",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

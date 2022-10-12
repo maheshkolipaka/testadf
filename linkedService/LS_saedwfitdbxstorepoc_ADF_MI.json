@@ -1,0 +1,15 @@
+{
+	"name": "LS_saedwfitdbxstorepoc_ADF_MI",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://saedwfitdbxstorepoc.dfs.core.windows.net"
+		},
+		"connectVia": {
+			"referenceName": "shiredwfitsandbox1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

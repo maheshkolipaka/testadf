@@ -1,0 +1,42 @@
+{
+	"name": "PSa_billing_main_dealer_raw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Folder": {
+				"type": "string"
+			},
+			"Filename": {
+				"type": "string"
+			},
+			"Subfolder1": {
+				"type": "string"
+			},
+			"Subfolder2": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat(dataset().Folder, '/', dataset().Subfolder1, '/', dataset().Subfolder2)",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

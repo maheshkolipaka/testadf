@@ -1,0 +1,47 @@
+{
+	"name": "SSISIR-customtest",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "East US 2",
+				"nodeSize": "Standard_D8_v3",
+				"numberOfNodes": 2,
+				"maxParallelExecutionsPerNode": 8
+			},
+			"ssisProperties": {
+				"customSetupScriptProperties": {
+					"blobContainerUri": "https://saedwfitdbxstorepoc.blob.core.windows.net/customscript",
+					"sasToken": {
+						"type": "SecureString",
+						"value": "**********"
+					}
+				},
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded",
+				"dataProxyProperties": {
+					"connectVia": {
+						"type": "IntegrationRuntimeReference",
+						"referenceName": "shiredwfitsandbox1"
+					},
+					"stagingLinkedService": {
+						"type": "LinkedServiceReference",
+						"referenceName": "AzureBlobStorage2"
+					}
+				},
+				"packageStores": [
+					{
+						"name": "packagedeploymentssis",
+						"packageStoreLinkedService": {
+							"referenceName": "SSISIR_pkg_testing",
+							"type": "LinkedServiceReference"
+						}
+					}
+				]
+			},
+			"customerVirtualNetwork": {
+				"subnetId": "/subscriptions/40fb0dac-7090-48ba-8b98-b1298e2106d8/resourceGroups/RGSPOKE-EASTUS2-DW-SANDBOX/providers/Microsoft.Network/virtualNetworks/vnet-eastus2-dw-sandbox/subnets/spoke-dw-sandbox-subnet-2"
+			}
+		}
+	}
+}

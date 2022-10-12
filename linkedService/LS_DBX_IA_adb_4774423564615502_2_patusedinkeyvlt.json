@@ -1,0 +1,18 @@
+{
+	"name": "LS_DBX_IA_adb_4774423564615502_2_patusedinkeyvlt",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "This is PAT Token in DBX workspace adb_4774423564615502.2 user token created by Prasad patusedinkeyvlt.",
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-4774423564615502.2.azuredatabricks.net",
+			"existingClusterId": "1228-150922-u59a7679",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjNDhmNjc2My04MzY5LTRhY2UtOTg3OS05ODBmOTllY2NiNWUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "shiredwfitsandbox1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

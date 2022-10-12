@@ -1,0 +1,23 @@
+{
+	"name": "Excel1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS_sadwfitpoc1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Job Plans",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "PeopleTech - DW MIgration to Azure_Ver7 (1).xlsx",
+				"folderPath": "DW_GH_TRACKALL/current",
+				"fileSystem": "outgoing-zone"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,18 @@
+{
+	"name": "DS_AzureVMToADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Azure_VM_to_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"folderPath": "File_Source_ADF_DataMigration/DW_DFS.DFSDM.FACT_PREMIUM"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

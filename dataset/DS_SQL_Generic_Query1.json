@@ -1,0 +1,25 @@
+{
+	"name": "DS_SQL_Generic_Query1",
+	"properties": {
+		"description": "Generic dataset to connect to data warehouse database",
+		"linkedServiceName": {
+			"referenceName": "genericsource",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SQLServerInstance": {
+				"type": "string"
+			},
+			"DatabaseName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "DEPRECATED-DoNotDeleteOrUse"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

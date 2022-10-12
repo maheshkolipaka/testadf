@@ -1,0 +1,33 @@
+{
+	"name": "DS_target_load_config",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqltoConfigDB",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TargetSchema": {
+				"type": "string",
+				"defaultValue": "@dataset().TargetSchema"
+			},
+			"ObjectName": {
+				"type": "string",
+				"defaultValue": "@dataset().ObjectName"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().TargetSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().ObjectName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

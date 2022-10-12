@@ -1,0 +1,30 @@
+{
+	"name": "BinaryDataSourceStore1",
+	"properties": {
+		"description": "Connection to your data source store. ",
+		"linkedServiceName": {
+			"referenceName": "LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FolderPath": {
+				"type": "string"
+			},
+			"Directory": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"folderPath": {
+					"value": "@concat(dataset().FolderPath,'/',dataset().Directory)",
+					"type": "Expression"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

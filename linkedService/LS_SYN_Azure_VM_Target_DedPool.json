@@ -1,0 +1,16 @@
+{
+	"name": "LS_SYN_Azure_VM_Target_DedPool",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "This uses Managed identity using Synapse",
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=synedwfitsandbox1.sql.azuresynapse.net;Initial Catalog=synedwfitsandbox1dedpool"
+		},
+		"connectVia": {
+			"referenceName": "AzureVMIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

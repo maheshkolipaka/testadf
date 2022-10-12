@@ -1,0 +1,75 @@
+{
+	"name": "Manju_SynapseSQLConnection",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "DATE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CALENDAR_YEAR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CALENDAR_QUARTER",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CALENDAR_MONTH",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CALENDAR_MONTH_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "CALENDAR_DAY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CALENDAR_WEEK",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DAY_OF_WEEK",
+				"type": "varchar"
+			},
+			{
+				"name": "HOLIDAY_INDICATOR",
+				"type": "varchar"
+			},
+			{
+				"name": "FULL_DATE",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "COSTCO_FISCAL_YEAR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COSTCO_FISCAL_MONTH",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "DFSDM",
+			"table": "DATE_DIM"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

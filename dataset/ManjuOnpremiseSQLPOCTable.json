@@ -1,0 +1,13 @@
+{
+	"name": "ManjuOnpremiseSQLPOCTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_DW_POC_MetadataDetails",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

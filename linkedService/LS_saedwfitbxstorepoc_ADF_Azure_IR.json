@@ -1,0 +1,15 @@
+{
+	"name": "LS_saedwfitbxstorepoc_ADF_Azure_IR",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://saedwfitdbxstorepoc.dfs.core.windows.net"
+		},
+		"connectVia": {
+			"referenceName": "AzureVMIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

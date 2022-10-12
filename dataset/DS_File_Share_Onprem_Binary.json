@@ -1,0 +1,33 @@
+{
+	"name": "DS_File_Share_Onprem_Binary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_FILE_atl0appstore1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Directory": {
+				"type": "string"
+			},
+			"Filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": {
+					"value": "@if(equals(dataset().Filename,' ') ,'',dataset().Filename)",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().Directory",
+					"type": "Expression"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

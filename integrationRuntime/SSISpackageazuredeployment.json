@@ -1,0 +1,27 @@
+{
+	"name": "SSISpackageazuredeployment",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "East US 2",
+				"nodeSize": "Standard_D2_v3",
+				"numberOfNodes": 1,
+				"maxParallelExecutionsPerNode": 2
+			},
+			"ssisProperties": {
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded",
+				"packageStores": [
+					{
+						"name": "SSISIRpackagestore",
+						"packageStoreLinkedService": {
+							"referenceName": "SSISIR_pkg_testing",
+							"type": "LinkedServiceReference"
+						}
+					}
+				]
+			}
+		}
+	}
+}

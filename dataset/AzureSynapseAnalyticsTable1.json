@@ -1,0 +1,17 @@
+{
+	"name": "AzureSynapseAnalyticsTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "test_excel"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

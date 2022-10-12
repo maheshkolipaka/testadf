@@ -1,0 +1,88 @@
+{
+	"name": "DS_AzureDatabricksDeltaLake_Target",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureDatabricksDeltaLake_Connection",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"fs.azure.account.auth.type.saedwfitdbxstorepoc.dfs.core.windows.net": {
+				"type": "string",
+				"defaultValue": "OAuth"
+			},
+			"fs.azure.account.oauth.provider.type.saedwfitdbxstorepoc.dfs.core.windows.net": {
+				"type": "string",
+				"defaultValue": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider"
+			},
+			"fs.azure.account.oauth2.client.id.saedwfitdbxstorepoc.dfs.core.windows.net": {
+				"type": "string",
+				"defaultValue": "f1b130e9-a9b5-42c9-8aaa-1220f5276546"
+			},
+			"fs.azure.account.oauth2.client.secret.saedwfitdbxstorepoc.dfs.core.windows.net": {
+				"type": "string",
+				"defaultValue": "k0e7Q~WfQtcRXMzR8Jq47QeA9inYSmddBIC6b"
+			},
+			"fs.azure.account.oauth2.client.endpoint.saedwfitdbxstorepoc.dfs.core.windows.net": {
+				"type": "string",
+				"defaultValue": "https://login.microsoftonline.com/331d1275-437c-4934-8eae-f5c7a0170487/oauth2/token"
+			}
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "dw_dfs_dfsdm",
+			"table": "date_dim"
+		},
+		"schema": [
+			{
+				"name": "DATE_ID",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_YEAR",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_QUARTER",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_MONTH",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_MONTH_NAME",
+				"type": "string"
+			},
+			{
+				"name": "CALENDAR_DAY",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_WEEK",
+				"type": "integer"
+			},
+			{
+				"name": "DAY_OF_WEEK",
+				"type": "string"
+			},
+			{
+				"name": "HOLIDAY_INDICATOR",
+				"type": "string"
+			},
+			{
+				"name": "FULL_DATE",
+				"type": "date"
+			},
+			{
+				"name": "COSTCO_FISCAL_YEAR",
+				"type": "integer"
+			},
+			{
+				"name": "COSTCO_FISCAL_MONTH",
+				"type": "integer"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

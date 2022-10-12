@@ -1,0 +1,43 @@
+{
+	"name": "SourceSQLConnection",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AIZ0VSQLP100001_Server",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DataBaseName": {
+					"value": "@dataset().DataBaseName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"SchemaName": {
+				"type": "string",
+				"defaultValue": "@dataset().SchemaName"
+			},
+			"ObjectName": {
+				"type": "string",
+				"defaultValue": "@dataset().ObjectName"
+			},
+			"DataBaseName": {
+				"type": "string",
+				"defaultValue": "@dataset().DataBaseName"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().SchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().ObjectName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

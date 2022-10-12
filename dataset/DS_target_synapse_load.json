@@ -1,0 +1,33 @@
+{
+	"name": "DS_target_synapse_load",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SYN_Azure_VM_Target_DedPool",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TargetSchema": {
+				"type": "string",
+				"defaultValue": "@dataset().TargetSchema"
+			},
+			"ObjectName": {
+				"type": "string",
+				"defaultValue": "@dataset().ObjectName"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().TargetSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().ObjectName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,230 @@
+{
+	"name": "Prasad_polybase",
+	"properties": {
+		"description": "This loads data from onprem to sqlserver",
+		"activities": [
+			{
+				"name": "Copy from onprem to synapse",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"allowCopyCommand": true,
+						"copyCommandSettings": {
+							"additionalOptions": {
+								"IDENTITY_INSERT": "'ON'"
+							}
+						},
+						"disableMetricsCollection": false
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+							"type": "LinkedServiceReference"
+						},
+						"path": "adfstrg"
+					},
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Info",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "LS_saedwfitdbxstorepoc_ADF_MI",
+								"type": "LinkedServiceReference"
+							},
+							"path": "adfstrg"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DEALERCODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DEALERCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ISACTIVE",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ISACTIVE",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "BILLINGPROGRAMCODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BILLINGPROGRAMCODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "REFERENCENUMBER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REFERENCENUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATEDBY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CREATEDBY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATEDON",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "CREATEDON",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "UPDATEDBY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "UPDATEDBY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UPDATEDON",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "UPDATEDON",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "OBI_CREATED_DT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "OBI_CREATED_DT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "OBI_CREATED_BY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OBI_CREATED_BY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "OBI_MOD_DT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "OBI_MOD_DT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "OBI_MOD_BY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OBI_MOD_BY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "OBI_REC_ID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "OBI_REC_ID",
+									"type": "Int32"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_onpremsql1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_synapse_DW_EPS_DWPSA",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-03T02:11:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,24 @@
+{
+	"name": "LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "\\\\atl0appstore1.cead.prd\\ASBI_DEV\\staging\\eps\\paymenttech\\biztalkoutbound",
+			"userId": "PRODCEAD\\Appacc_DWH_biuserprd",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_Keyvlt_kyvltedwsndbxfit_MI",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ad-pwd-ceadprd-AppAcc-DWH-biuserprd"
+			}
+		},
+		"connectVia": {
+			"referenceName": "shiredwfitsandbox1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

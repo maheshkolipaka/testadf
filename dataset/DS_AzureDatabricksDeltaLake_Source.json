@@ -1,0 +1,66 @@
+{
+	"name": "DS_AzureDatabricksDeltaLake_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureDatabricksDeltaLake_Connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "dw_dfs_dfsdm",
+			"table": "date_dim"
+		},
+		"schema": [
+			{
+				"name": "DATE_ID",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_YEAR",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_QUARTER",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_MONTH",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_MONTH_NAME",
+				"type": "string"
+			},
+			{
+				"name": "CALENDAR_DAY",
+				"type": "integer"
+			},
+			{
+				"name": "CALENDAR_WEEK",
+				"type": "integer"
+			},
+			{
+				"name": "DAY_OF_WEEK",
+				"type": "string"
+			},
+			{
+				"name": "HOLIDAY_INDICATOR",
+				"type": "string"
+			},
+			{
+				"name": "FULL_DATE",
+				"type": "date"
+			},
+			{
+				"name": "COSTCO_FISCAL_YEAR",
+				"type": "integer"
+			},
+			{
+				"name": "COSTCO_FISCAL_MONTH",
+				"type": "integer"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

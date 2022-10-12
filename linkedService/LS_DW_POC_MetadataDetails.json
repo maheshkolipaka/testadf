@@ -1,0 +1,23 @@
+{
+	"name": "LS_DW_POC_MetadataDetails",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=AIZ0VSQLP100000.cead.prd;Initial Catalog=DW_POC;User ID=AppAcc_DWH_biuserprd",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_Keyvlt_kyvltedwsndbxfit_MI",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "dbsrv-pwd-AIZ0VSQLP100000-AppAcc-DWH-biuserprd"
+			}
+		},
+		"connectVia": {
+			"referenceName": "shiredwfitsandbox1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,62 @@
+{
+	"name": "DS_Src_details_poly_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "MetaData Tables_test_1.csv",
+				"folderPath": "data_migration_src",
+				"fileSystem": "test"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DataBaseName",
+				"type": "String"
+			},
+			{
+				"name": "SchemaName",
+				"type": "String"
+			},
+			{
+				"name": "ObjectName",
+				"type": "String"
+			},
+			{
+				"name": "TargetSchema",
+				"type": "String"
+			},
+			{
+				"name": "LastGeneratedTime",
+				"type": "String"
+			},
+			{
+				"name": "Object Type",
+				"type": "String"
+			},
+			{
+				"name": "Is Structure Migrated",
+				"type": "String"
+			},
+			{
+				"name": "Environment",
+				"type": "String"
+			},
+			{
+				"name": "Is Data Migrated",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

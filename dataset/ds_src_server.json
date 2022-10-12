@@ -1,0 +1,13 @@
+{
+	"name": "ds_src_server",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AIZ0VSQLP100001_Server",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

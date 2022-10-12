@@ -1,0 +1,17 @@
+{
+	"name": "SqlServerTableDT2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DWPSA",
+			"table": "DMK_BILL_DEALER_HIS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

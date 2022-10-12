@@ -1,0 +1,80 @@
+{
+	"name": "DS_Config_Metadata_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CONFIG_MetadataDetails",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DataBaseName",
+				"type": "varchar"
+			},
+			{
+				"name": "SchemaName",
+				"type": "varchar"
+			},
+			{
+				"name": "ObjectName",
+				"type": "varchar"
+			},
+			{
+				"name": "SourceQuery",
+				"type": "varchar"
+			},
+			{
+				"name": "TargetSchema",
+				"type": "varchar"
+			},
+			{
+				"name": "is_identity",
+				"type": "varchar"
+			},
+			{
+				"name": "truncate_reload",
+				"type": "varchar"
+			},
+			{
+				"name": "LastGeneratedTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "objecttype",
+				"type": "varchar"
+			},
+			{
+				"name": "IsStructureMigrated",
+				"type": "varchar"
+			},
+			{
+				"name": "Environment",
+				"type": "varchar"
+			},
+			{
+				"name": "IsDataMigrated",
+				"type": "varchar"
+			},
+			{
+				"name": "status",
+				"type": "varchar"
+			},
+			{
+				"name": "Pipeline_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Comments",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "ADF_CONFIG",
+			"table": "DM_MetadataDetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

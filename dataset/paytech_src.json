@@ -1,0 +1,22 @@
+{
+	"name": "paytech_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "065213.closed_batch_190626.csv_resp"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

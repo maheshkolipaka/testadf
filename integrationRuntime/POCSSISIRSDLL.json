@@ -1,0 +1,43 @@
+{
+	"name": "POCSSISIRSDLL",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "East US 2",
+				"nodeSize": "Standard_D2_v3",
+				"numberOfNodes": 1,
+				"maxParallelExecutionsPerNode": 2
+			},
+			"ssisProperties": {
+				"customSetupScriptProperties": {
+					"blobContainerUri": "https://sadwfitpoc1.blob.core.windows.net/",
+					"sasToken": {
+						"type": "SecureString",
+						"value": "**********"
+					}
+				},
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded",
+				"expressCustomSetupProperties": [
+					{
+						"type": "EnvironmentVariableSetup",
+						"typeProperties": {
+							"variableName": "AZURE_STORAGE_CONNECTION_STRING",
+							"variableValue": "DefaultEndpointsProtocol=https;AccountName=sadwfitpoc1;AccountKey=PcUFfbEC6+XlWWZ/atb1yXmYu3gYudERXmTNWa95p3tqfDZf3ip3FYmz6bYuykNknljhJvOTCJIjW6M1B2dxFA==;EndpointSuffix=core.windows.net"
+						}
+					}
+				],
+				"packageStores": [
+					{
+						"name": "pocssisstore",
+						"packageStoreLinkedService": {
+							"referenceName": "SSISlinkedService",
+							"type": "LinkedServiceReference"
+						}
+					}
+				]
+			}
+		}
+	}
+}

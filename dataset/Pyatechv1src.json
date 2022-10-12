@@ -1,0 +1,18 @@
+{
+	"name": "Pyatechv1src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Filesystem_atl0appstore1_Appacc_DWH_biuserprd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "065213.closed_batch_190626.csv_resp"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

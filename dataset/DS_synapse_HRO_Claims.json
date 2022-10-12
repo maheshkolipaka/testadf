@@ -1,0 +1,17 @@
+{
+	"name": "DS_synapse_HRO_Claims",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "HRO",
+			"table": "HRO_CLAIMS_CSV"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

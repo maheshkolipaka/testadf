@@ -1,0 +1,88 @@
+{
+	"name": "SqlServerTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DEALERCODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ISACTIVE",
+				"type": "bit"
+			},
+			{
+				"name": "BILLINGPROGRAMCODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REFERENCENUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATEDBY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATEDON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "UPDATEDBY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UPDATEDON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_CREATED_DT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_CREATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBI_MOD_DT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_MOD_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBI_REC_ID",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "DWPSA",
+			"table": "DMK_BILL_DEALER_CUR"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

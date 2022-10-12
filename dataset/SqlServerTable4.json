@@ -1,0 +1,75 @@
+{
+	"name": "SqlServerTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "FILE_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "RECORD_TYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "COMPANY_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "REPORT_DATE_FROM",
+				"type": "date"
+			},
+			{
+				"name": "REPORT_DATE_TO",
+				"type": "date"
+			},
+			{
+				"name": "REPORT_GENERATION_DATE",
+				"type": "date"
+			},
+			{
+				"name": "REPORT_GENERATION_TIME",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "OBI_CREATED_DT",
+				"type": "datetime2",
+				"scale": 2
+			},
+			{
+				"name": "OBI_CREATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBI_MOD_DT",
+				"type": "datetime2",
+				"scale": 2
+			},
+			{
+				"name": "OBI_MOD_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INBOUND_FILENAME",
+				"type": "varchar"
+			},
+			{
+				"name": "RECEIVED_DATE",
+				"type": "datetime2",
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "PAYTECH",
+			"table": "REPORT_AB_HEADER_RECORDS_HIS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

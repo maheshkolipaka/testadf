@@ -1,0 +1,63 @@
+{
+	"name": "SSIS_Synapse_server",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SSIS Package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\saedwfitlogicapppoc.file.core.windows.net\\ssispackagestore\\SSISDemoSSISIR.ispac:demo.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "saedwfitlogicapppoc",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							}
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISpackageazuredeployment",
+						"type": "IntegrationRuntimeReference"
+					},
+					"loggingLevel": "Basic",
+					"packageParameters": {
+						"Password": {
+							"value": "Xhj857Lc"
+						}
+					},
+					"logLocation": {
+						"logPath": "\\\\saedwfitlogicapppoc.file.core.windows.net\\ssislog",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "saedwfitlogicapppoc",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							}
+						}
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-01T20:14:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

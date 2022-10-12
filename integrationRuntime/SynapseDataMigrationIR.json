@@ -1,0 +1,6 @@
+{
+	"name": "SynapseDataMigrationIR",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

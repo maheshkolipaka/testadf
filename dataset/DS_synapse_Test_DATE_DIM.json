@@ -1,0 +1,88 @@
+{
+	"name": "DS_synapse_Test_DATE_DIM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DEALERCODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ISACTIVE",
+				"type": "bit"
+			},
+			{
+				"name": "BILLINGPROGRAMCODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REFERENCENUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATEDBY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATEDON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "UPDATEDBY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UPDATEDON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_CREATED_DT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_CREATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBI_MOD_DT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "OBI_MOD_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBI_REC_ID",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "Test",
+			"table": "DATE_DIM"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Paytech_Main_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Filesystem_atl0appstore1_Appacc_DWH_bisuerprd_prod",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

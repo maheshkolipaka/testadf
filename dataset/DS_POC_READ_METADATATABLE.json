@@ -1,0 +1,56 @@
+{
+	"name": "DS_POC_READ_METADATATABLE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQLDB_AIZ0VSQLP100001_prodcead_biuserprd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "DataBaseName",
+				"type": "varchar"
+			},
+			{
+				"name": "SchemaName",
+				"type": "varchar"
+			},
+			{
+				"name": "ObjectName",
+				"type": "varchar"
+			},
+			{
+				"name": "TargetSchema",
+				"type": "varchar"
+			},
+			{
+				"name": "LastGeneratedTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "objecttype",
+				"type": "varchar"
+			},
+			{
+				"name": "IsStructureMigrated",
+				"type": "varchar"
+			},
+			{
+				"name": "Environment",
+				"type": "varchar"
+			},
+			{
+				"name": "IsDataMigrated",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "PEOPLETECH",
+			"table": "DM_MetadataDetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
