@@ -1,0 +1,11 @@
+{
+	"name": "LS_Keyvlt_kyvltedwsndbxfit_MI",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kyvltedwsndbxfit.vault.azure.net/"
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"name": "LS_ADLSG2_saedwfitsndbxpoc1_app_sp1_edwfitsndbx1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://saedwfitsndboxpoc1.dfs.core.windows.net",
+			"tenant": "331d1275-437c-4934-8eae-f5c7a0170487",
+			"servicePrincipalId": "016fb9eb-47e8-496f-b590-c0a65310c92f",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"servicePrincipalCredential": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_Keyvlt_kyvltedwsndbxfit_MI",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "app-secret-app-sp1-edwfitsndbx"
+			}
+		},
+		"connectVia": {
+			"referenceName": "shiredwfitsandbox1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

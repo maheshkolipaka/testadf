@@ -1,0 +1,25 @@
+{
+	"name": "LS_Azure_VM_Onpremise_SQL_Server",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Connect On-premise SQL Server in Azure VM",
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=True;Data Source=AIZ0VSQLP100001;Initial Catalog=DW_POC",
+			"userName": "prodcead\\biuserdev",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_KV_GDA_DEV",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ad-pwd-prodcead-biuserdev"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AzureVMIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
