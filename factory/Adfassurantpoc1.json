@@ -1,9 +1,0 @@
-{
-	"name": "Adfassurantpoc1",
-	"location": "eastus",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "bb094383-4ed2-44ec-8ba4-d4073229c226",
-		"tenantId": "31386ae4-e5c5-4956-80b9-3868597721b3"
-	}
-}
