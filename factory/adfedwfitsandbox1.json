@@ -1,0 +1,9 @@
+{
+	"name": "adfedwfitsandbox1",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "78bd89a0-2eff-45c3-b38b-396e42d2628b",
+		"tenantId": "331d1275-437c-4934-8eae-f5c7a0170487"
+	}
+}
