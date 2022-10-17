@@ -1,0 +1,69 @@
+{
+	"name": "PL_GEN_Execute_SSIS_Package",
+	"properties": {
+		"activities": [
+			{
+				"name": "ACT_Execute_SSIS_Package",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Param1",
+						"value": "Test"
+					}
+				],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": {
+							"value": "@pipeline().parameters.Package_Path",
+							"type": "Expression"
+						},
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": {
+								"value": "@pipeline().parameters.Configuration_Path",
+								"type": "Expression"
+							}
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISpackageazuredeployment",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Package_Path": {
+				"type": "string"
+			},
+			"Configuration_Path": {
+				"type": "string"
+			},
+			"Logging_Path": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Generic"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-07-26T06:04:20Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,931 @@
+{
+	"name": "Prasad_3",
+	"properties": {
+		"activities": [
+			{
+				"name": "CopyDataHROPolicySyn",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "LS_ADLSG2_saedwfitsndboxpoc1_Strgkey",
+							"type": "LinkedServiceReference"
+						},
+						"path": "poliybasestaging"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Client",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Client",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Country",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Country",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SalesChannel",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SalesChannel",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DealerID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DealerID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DealerDescription",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DealerDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CalendarDate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CalendarDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CalendarYYYY_MM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CalendarYYYY_MM",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CalendarYear",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CalendarYear",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ActiveContractsCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ActiveContractsCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ActiveContractsRetail",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ActiveContractsRetail",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "ActiveContractsRevenue",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ActiveContractsRevenue",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "ActiveContractsNetAdds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ActiveContractsNetAdds",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "NewContractsCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NewContractsCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "NewContractsRetail",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NewContractsRetail",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "NewContractsRevenue",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NewContractsRevenue",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "NewContractsLossReserve",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NewContractsLossReserve",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "NewContractsAverageRetail",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NewContractsAverageRetail",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "NewContractsAverageRevenue",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NewContractsAverageRevenue",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "CancelsCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CancelsCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "NetSalesCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NetSalesCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "NetRetailAmount",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NetRetailAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "NetRevenue",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NetRevenue",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "CancelRate",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CancelRate",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "CancelAgeInMonth",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CancelAgeInMonth",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "CancelsRetailRefund",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CancelsRetailRefund",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "CancelsRevenueRefund",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CancelsRevenueRefund",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "CancelsAverageRevenueRefund",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CancelsAverageRevenueRefund",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_test_csv_hro_policy_src",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_synapse_HRO_Policy",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "CopyDataHROClaimSyn",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Client",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Client",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Country",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Country",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SalesChannel",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SalesChannel",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DealerID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DealerID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DealerDescription",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DealerDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CalendarDate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CalendarDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CalendarYYYY_MM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CalendarYYYY_MM",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CalendarYear",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CalendarYear",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Manufacturer",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Manufacturer",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductCategoryLevel1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ProductCategoryLevel1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductCategoryLevel2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ProductCategoryLevel2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductCategoryLevel3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ProductCategoryLevel3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductCategoryLevel4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ProductCategoryLevel4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsReportedCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsReportedCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsReportedCountClientAdmin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsReportedCountClientAdmin",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsReportedCountAIZAdmin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsReportedCountAIZAdmin",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsReportedCountIVR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsReportedCountIVR",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsReportedCountPhone",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsReportedCountPhone",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsReportedCountSSP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsReportedCountSSP",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsReportedCountWeb",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsReportedCountWeb",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "IncidentsPerClaim",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IncidentsPerClaim",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsReportedCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsReportedCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsReportedCountAIZAdmin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsReportedCountAIZAdmin",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsReportedCountClientAdmin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsReportedCountClientAdmin",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsReportedCountIVR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsReportedCountIVR",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsReportedCountPhone",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsReportedCountPhone",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsReportedCountSSP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsReportedCountSSP",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsReportedCountWeb",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsReportedCountWeb",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsPaidAmount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsPaidAmount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsPaidCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsPaidCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsDispatchedCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsDispatchedCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsApprovedCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsApprovedCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaimsDeniedCount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ClaimsDeniedCount",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "BuyoutCountOfRepairs",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BuyoutCountOfRepairs",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "BuyoutPercentOfRepairs",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BuyoutPercentOfRepairs",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "ApprovalFrequency",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ApprovalFrequency",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "ApprovalRate",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ApprovalRate",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_test_csv_hro_claim_src",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_synapse_HRO_Claims",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-02-11T01:51:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

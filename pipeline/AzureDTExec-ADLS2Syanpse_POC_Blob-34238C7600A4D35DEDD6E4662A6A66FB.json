@@ -1,0 +1,131 @@
+{
+	"name": "AzureDTExec-ADLS2Syanpse_POC_Blob-34238C7600A4D35DEDD6E4662A6A66FB",
+	"properties": {
+		"activities": [
+			{
+				"name": "ExecuteSsisPackageFromDTExec",
+				"description": "Package path: \\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\Paytech_BlobToSynapse\\ADLS2Syanpse_POC_Blob.dtsx.Configuration path: \\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\Paytech_BlobToSynapse\\POC_ADLS2Synapse.dtsConfig.Overridden properties: \\Package.Variables[PROJECT_NAME].Value;DW_MIGRATION;\\Package.Variables[SOLUTION_NAME].Value;ADF_EXEC_POC;\\Package.Variables[DATA_SOURCE_OBJECT_NAME].Value;SynapseTesting;.",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\Paytech_BlobToSynapse\\ADLS2Syanpse_POC_Blob.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"packagePassword": {
+								"type": "SecureString",
+								"value": "**********"
+							},
+							"accessCredential": {
+								"domain": {
+									"value": "@pipeline().parameters.packageAccessDomain",
+									"type": "Expression"
+								},
+								"userName": {
+									"value": "@pipeline().parameters.packageAccessUserName",
+									"type": "Expression"
+								},
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\Paytech_BlobToSynapse\\POC_ADLS2Synapse.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					},
+					"propertyOverrides": {
+						"\\Package.Variables[PROJECT_NAME].Value": {
+							"value": {
+								"type": "SecureString",
+								"value": "**********"
+							},
+							"isSensitive": true
+						},
+						"\\Package.Variables[SOLUTION_NAME].Value": {
+							"value": {
+								"type": "SecureString",
+								"value": "**********"
+							},
+							"isSensitive": true
+						},
+						"\\Package.Variables[DATA_SOURCE_OBJECT_NAME].Value": {
+							"value": {
+								"type": "SecureString",
+								"value": "**********"
+							},
+							"isSensitive": true
+						}
+					},
+					"loggingLevel": "@pipeline().parameters.logLevel",
+					"logLocation": {
+						"logPath": {
+							"value": "@pipeline().parameters.logPath",
+							"type": "Expression"
+						},
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": {
+									"value": "@pipeline().parameters.logAccessDomain",
+									"type": "Expression"
+								},
+								"userName": {
+									"value": "@pipeline().parameters.logAccessUserName",
+									"type": "Expression"
+								},
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							}
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"packageAccessDomain": {
+				"type": "Object"
+			},
+			"packageAccessUserName": {
+				"type": "Object"
+			},
+			"packageAccessPassword": {
+				"type": "SecureString"
+			},
+			"packagePassword": {
+				"type": "SecureString"
+			},
+			"logPath": {
+				"type": "String"
+			},
+			"logAccessDomain": {
+				"type": "Object"
+			},
+			"logAccessUserName": {
+				"type": "Object"
+			},
+			"logAccessPassword": {
+				"type": "SecureString"
+			},
+			"logLevel": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-04-12T16:21:24Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

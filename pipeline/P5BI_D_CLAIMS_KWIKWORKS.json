@@ -1,0 +1,96 @@
+{
+	"name": "P5BI_D_CLAIMS_KWIKWORKS",
+	"properties": {
+		"activities": [
+			{
+				"name": "prc_SrcDataTransfConcatDate",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[DW_CLAIMS_dbo].[prc_SrcDataTransfConcatDate]",
+					"storedProcedureParameters": {
+						"TNS": {
+							"value": "kwikworks.ASPClaimsAgingRpt_CUR",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "prc_SrcDataTransf",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "prc_SrcDataTransfConcatDate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[DW_CLAIMS_dbo].[prc_SrcDataTransf]",
+					"storedProcedureParameters": {
+						"TNS": {
+							"value": "kwikworks.ASPClaimsAgingRpt_CUR",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "prc_Populate_ASPClaimsAgingRpt_tbl",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "prc_SrcDataTransf",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[DW_CLAIMS_Kwikworks].[prc_Populate_ASPClaimsAgingRpt_tbl]"
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-05-12T13:15:51Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

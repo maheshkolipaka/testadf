@@ -1,0 +1,47 @@
+{
+	"name": "PL_GEN_Dedicated_Pool_Script_Task",
+	"properties": {
+		"activities": [
+			{
+				"name": "ACT_Script_Run_Query",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "LS_SYN_MI_synedwfitsandbox1dedpool",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": {
+								"value": "@pipeline().parameters.script",
+								"type": "Expression"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"script": {
+				"type": "string",
+				"defaultValue": "sql statement"
+			}
+		},
+		"folder": {
+			"name": "Generic"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-11T01:59:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

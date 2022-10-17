@@ -1,0 +1,44 @@
+{
+	"name": "W_FORECAST_CARRIER_RT_TMOBILE_PR",
+	"properties": {
+		"activities": [
+			{
+				"name": "W_FORECAST_CARRIER_RT_TMOBILE_PR",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\BI_FORECAST\\P5BI.CARRIER_RATE.TMOBILE_PR\\DW_FORECAST_CARRIER_RT_TMOBILE_PR.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\BI_FORECAST\\P5BI.CARRIER_RATE.TMOBILE_PR\\DW_CARRIER_RATE_FILELOAD.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-04-12T09:11:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

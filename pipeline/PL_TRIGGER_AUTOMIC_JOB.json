@@ -1,0 +1,88 @@
+{
+	"name": "PL_TRIGGER_AUTOMIC_JOB",
+	"properties": {
+		"activities": [
+			{
+				"name": "ACT_WEB_TRG_AUTOMIC_JOB",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(variables('URLROOT'),'://',pipeline().parameters.HOSTNAME,':',variables('PORT'),variables('APIURL'),'/',variables('APIVERSION'),'/',pipeline().parameters.CLIENT,'/','executions')",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "shiredwfitsandbox1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json",
+						"Accept": "*/*",
+						"Accept-Encoding": "gzip, deflate, br",
+						"Connection": "keep-alive"
+					},
+					"body": {
+						"value": "{\n\t\"object_name\": \"PTG_JOBP_POC_ADF_EXEC\",\n    \"execution_option\": \"execute\"\n}",
+						"type": "Expression"
+					},
+					"authentication": {
+						"type": "Basic",
+						"username": "zw8656",
+						"password": {
+							"type": "SecureString",
+							"value": "**********"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"JOBNAME": {
+				"type": "string",
+				"defaultValue": "PTG_JOBP_POC_ADF_EXEC"
+			},
+			"HOSTNAME": {
+				"type": "string",
+				"defaultValue": "api-automicmod.assurant.com"
+			},
+			"CLIENT": {
+				"type": "string",
+				"defaultValue": "504"
+			}
+		},
+		"variables": {
+			"PORT": {
+				"type": "String",
+				"defaultValue": "8088"
+			},
+			"URLROOT": {
+				"type": "String",
+				"defaultValue": "http"
+			},
+			"APIURL": {
+				"type": "String",
+				"defaultValue": "ae/api"
+			},
+			"APIVERSION": {
+				"type": "String",
+				"defaultValue": "v1"
+			},
+			"LOGIN_DEPT": {
+				"type": "String",
+				"defaultValue": "zw8656"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-10T12:50:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

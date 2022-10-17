@@ -1,0 +1,44 @@
+{
+	"name": "RK_SynapseToSynapse",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SSIS package",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\SynapseToSynapse.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\SynapseToSynapse.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISpackageazuredeployment",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-02-17T18:43:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

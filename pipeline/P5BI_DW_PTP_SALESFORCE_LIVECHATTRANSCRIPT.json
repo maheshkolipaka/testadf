@@ -1,0 +1,43 @@
+{
+	"name": "P5BI_DW_PTP_SALESFORCE_LIVECHATTRANSCRIPT",
+	"properties": {
+		"activities": [
+			{
+				"name": "DW_PTP_SALESFORCE_LIVECHATTRANSCRIP",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\ASBI\\SSIS\\DW_GW\\DW_PTP_SALESFORCE_LIVECHATTRANSCRIPT.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							}
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-04-22T11:13:20Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
