@@ -1,0 +1,59 @@
+{
+	"name": "P5BI_DGHOST",
+	"properties": {
+		"activities": [
+			{
+				"name": "P5BI_DGHOST",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\DW_GHOST_INVOICE.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_GHOST\\GHOST_US.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					},
+					"loggingLevel": "Basic",
+					"logLocation": {
+						"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\ASBI\\SSIS\\DW_GHOST",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							}
+						}
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-04-25T11:33:53Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

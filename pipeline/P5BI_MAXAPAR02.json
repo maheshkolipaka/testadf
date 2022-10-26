@@ -1,0 +1,44 @@
+{
+	"name": "P5BI_MAXAPAR02",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SSIS package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\BI_GWS_DOM\\AR_PSA_MAXVALUE_APPLE_AR_DEVICE.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\CONFIGURATION\\BI_GWS_DOM\\MAXVALUE_APPLE_AR.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-04-25T07:37:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

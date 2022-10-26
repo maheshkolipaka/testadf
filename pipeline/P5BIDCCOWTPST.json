@@ -1,0 +1,44 @@
+{
+	"name": "P5BIDCCOWTPST",
+	"properties": {
+		"activities": [
+			{
+				"name": "P5BIDCCOWTPST",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DATA_AUDIT\\PR_Data_Audit_Open_ETL_RUN_ID.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DATA_AUDIT\\DFS_CCO_WTP_DVDN.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-05-23T05:29:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,59 @@
+{
+	"name": "P5BI_D_WRLS_VISN_DATA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SSIS package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.WRLS.VISN_DATA.MAIN\\PSA_WIRELESS_VISION_FILE_LOAD.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.WRLS.VISN_DATA.MAIN\\WRLS_VISION_FILE_LOAD.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					},
+					"loggingLevel": "Basic",
+					"logLocation": {
+						"logPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.WRLS.VISN_DATA.MAIN",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							}
+						}
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-31T10:40:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

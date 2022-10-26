@@ -1,0 +1,129 @@
+{
+	"name": "Manju_DM_SQLDB_Synapse_bulk",
+	"properties": {
+		"activities": [
+			{
+				"name": "For Each Table",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "List Tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('List Tables').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy Table to Synapse",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "SqlDWSink",
+									"writeBehavior": "Insert",
+									"sqlWriterUseTableLock": false,
+									"tableOption": "autoCreate",
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceSQLConnection",
+									"type": "DatasetReference",
+									"parameters": {
+										"SchemaName": {
+											"value": "@item().SchemaName",
+											"type": "Expression"
+										},
+										"ObjectName": {
+											"value": "@item().ObjectName",
+											"type": "Expression"
+										},
+										"DataBaseName": {
+											"value": "@item().DatabaseName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_target_load",
+									"type": "DatasetReference",
+									"parameters": {
+										"TargetSchema": {
+											"value": "@item().TargetSchema",
+											"type": "Expression"
+										},
+										"ObjectName": {
+											"value": "@item().ObjectName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "List Tables",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT [DataBaseName]\n      ,[SchemaName]\n      ,[ObjectName]\n      ,[TargetSchema]\n      ,[LastGeneratedTime]\n      ,[objecttype]\n      ,[IsStructureMigrated]\n      ,[Environment]\n      ,[IsDataMigrated]\n  FROM [DW_POC].[PEOPLETECH].[MetadataDetails] Where upper(objecttype) like 'TABLE%' and IsStructureMigrated = 1 and Environment = 'synapse'\n  and ObjectName  in ('STATUS_HISTORY','PinAudit','ODS_SURVEY','FACT_ENROLLMENT','DIM_ENROLLMENT_DETAIL',\n'Perilcoverage') order by objectname",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_POC_Access",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-19T05:54:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

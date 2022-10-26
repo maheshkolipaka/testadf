@@ -1,0 +1,48 @@
+{
+	"name": "CubeRefresh",
+	"properties": {
+		"description": "This uses SSIS package which calls SSAS Cube component connect to Synapse and refreshes it",
+		"activities": [
+			{
+				"name": "Execute SSIS package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\SSAS_CUBE_REFRESH.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\SSAS_CUBE_REFRESH.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "POC"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-03-07T07:15:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

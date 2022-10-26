@@ -1,0 +1,394 @@
+{
+	"name": "Archiving_genericpipline_test",
+	"properties": {
+		"activities": [
+			{
+				"name": "ACT_IF_Condition_Compress_Outgoing",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(pipeline().parameters.IsCompressOutgoing, true)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "ACT_Binary_Copy_Outgoing_As_Is",
+							"description": "Binary copy (as-is) of files from source to destination",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": false,
+										"deleteFilesAfterCompletion": false
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings",
+										"compressionProperties": {
+											"type": "TarReadSettings"
+										}
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"parallelCopies": 4
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_File_ADLS_Outgoing_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Current_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@pipeline().parameters.Compress_FileName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_File_ADLS_Outgoing_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Outgoing_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@concat(pipeline().parameters.Compress_FileName, '.zip')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "ACT_Binary_Copy_Outgoing_Compress",
+							"description": "Binary copy and compress files from current to outgoing",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": false,
+										"deleteFilesAfterCompletion": false
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings",
+										"compressionProperties": {
+											"type": "TarReadSettings"
+										}
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"parallelCopies": 4
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_File_ADLS_Outgoing_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Current_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@pipeline().parameters.Compress_FileName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_File_ADLS_Binary_Compress",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Outgoing_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@concat(pipeline().parameters.Compress_FileName, '.zip')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "ACT_IF_Condition_Compress_Archive",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "ACT_IF_Condition_Compress_Outgoing",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(pipeline().parameters.IsCompressArchive, true)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "ACT_Binary_Copy_Outgoing_As_Is_copy1",
+							"description": "Binary copy (as-is) of files from source to destination",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": false,
+										"deleteFilesAfterCompletion": false
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings",
+										"compressionProperties": {
+											"type": "TarReadSettings"
+										}
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"parallelCopies": 4
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_File_ADLS_Outgoing_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Current_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@pipeline().parameters.Compress_FileName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_File_ADLS_Outgoing_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Archive_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@concat(pipeline().parameters.Compress_FileName, '.zip')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "ACT_Binary_Copy_Archive_Compress",
+							"description": "Binary copy and compress files from current to archive",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": false,
+										"deleteFilesAfterCompletion": false
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings",
+										"compressionProperties": {
+											"type": "TarReadSettings"
+										}
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"parallelCopies": 4
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_File_ADLS_Outgoing_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Current_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@pipeline().parameters.Compress_FileName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_File_ADLS_Binary_Compress",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.Outgoing_Container",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.Archive_Directory",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@concat(pipeline().parameters.Compress_FileName,'.zip')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"Outgoing_Container": {
+				"type": "string",
+				"defaultValue": "outgoing-zone"
+			},
+			"Current_Directory": {
+				"type": "string",
+				"defaultValue": "current"
+			},
+			"Outgoing_Directory": {
+				"type": "string",
+				"defaultValue": "outgoing"
+			},
+			"Compress_FileName": {
+				"type": "string",
+				"defaultValue": "test"
+			},
+			"IsCompressOutgoing": {
+				"type": "bool",
+				"defaultValue": true
+			},
+			"IsCompressArchive": {
+				"type": "bool",
+				"defaultValue": true
+			},
+			"Archive_Directory": {
+				"type": "string",
+				"defaultValue": "archive"
+			}
+		},
+		"folder": {
+			"name": "Generic"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-07-22T09:42:15Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,44 @@
+{
+	"name": "SHPT_USCC_STORE_DATA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SSIS Package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.SHPT_USCC_STORE_DATA_CUR.LOAD\\SHPT_USCC_STORE_DATA_CUR.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\P5BI.D.SHPT_USCC_STORE_DATA_CUR.LOAD\\SHPT_USCC_STORE_DATA.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-25T07:47:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

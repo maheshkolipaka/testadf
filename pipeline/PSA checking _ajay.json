@@ -1,0 +1,89 @@
+{
+	"name": "PSA checking _ajay",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "PSA_billing_main_dealer",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "PSa_billing_main_dealer_raw",
+						"type": "DatasetReference",
+						"parameters": {
+							"Folder": {
+								"value": "PSA_Billing_Main_Load",
+								"type": "Expression"
+							},
+							"Filename": {
+								"value": "@concat(pipeline().parameters.Databasename,'_',pipeline().parameters.SchemaName,'_',pipeline().parameters.Tablename,'.parquet')",
+								"type": "Expression"
+							},
+							"Subfolder1": {
+								"value": "@pipeline().parameters.TableName",
+								"type": "Expression"
+							},
+							"Subfolder2": "@concat(formatDateTime(utcnow(),'yyyy'),'-',formatDateTime(utcnow(),'MM'),'-',formatDateTime(utcnow(),'dd'))"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"Databasename": {
+				"type": "string",
+				"defaultValue": "DW_EPS"
+			},
+			"SchemaName": {
+				"type": "string",
+				"defaultValue": "dbo"
+			},
+			"TableName": {
+				"type": "string",
+				"defaultValue": "Dealer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-02-27T17:30:33Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

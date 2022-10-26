@@ -1,0 +1,71 @@
+{
+	"name": "KWIKWORKS_DCKWSL",
+	"properties": {
+		"activities": [
+			{
+				"name": "kwikworks",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_DMVMT_Onprem_To_ADLS_Filecopy_Generic",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Data_Destination_Zone_Container": "rawzone",
+						"Data_Destination_Directory": "unprocessed/staging/DW_CLAIMS/kwikworks",
+						"Data_Source_Directory": "staging/DW_CLAIMS/kwikworks",
+						"Data_Source_File_Pattern": "ASPClaimsAgingReport",
+						"Source_Type": "ONPREM"
+					}
+				}
+			},
+			{
+				"name": "Execute SSIS package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [
+					{
+						"activity": "kwikworks",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\SSIS\\DW_CLAIMS\\Claims_Kwikworks_AgingRptExtract.dtsx",
+						"type": "File",
+						"typeProperties": {
+							"accessCredential": {
+								"domain": "Azure",
+								"userName": "sadwfitpoc1",
+								"password": {
+									"type": "SecureString",
+									"value": "**********"
+								}
+							},
+							"configurationPath": "\\\\sadwfitpoc1.file.core.windows.net\\packagedeploymentssis\\sqlserver\\ssis\\development\\BI\\Configuration\\DW_CLAIMS\\c_ClaimsOleDbWin.dtsConfig"
+						}
+					},
+					"connectVia": {
+						"referenceName": "SSISIR-customtest",
+						"type": "IntegrationRuntimeReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-04-28T19:44:52Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
